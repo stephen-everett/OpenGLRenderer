@@ -98,7 +98,7 @@ void Renderer::render() {
 	shaders[0].setUniform("view", camera->getCamera());
 	shaders[0].setUniform("viewPos", camera->getLocation());
 
-	shaders[1].setUniform("view", camera->getCamera());
+	//shaders[1].setUniform("view", camera->getCamera());
 	//shaders[0].setUniform("viewPos", camera->getLocation());
 	for(auto object : render_objects) {
 		object->render(*window, shaders[0]);
