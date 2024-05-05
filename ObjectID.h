@@ -1,0 +1,13 @@
+#pragma once
+enum ObjectID {
+	CUBE,
+	TESTNODE,
+	BUSNODE,
+	OBJECT3D,
+	GLOBAL,
+	TRIANGLE,
+	BUNNY,
+	RENDERER,
+	CAMERA,
+	ROOM
+};
