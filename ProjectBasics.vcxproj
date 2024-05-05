@@ -105,7 +105,7 @@
       <PreprocessorDefinitions>SFML_STATIC;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>D:\Cpp\Libraries\SFML-2.6.1\include;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Cpp\SFML Projects\OpenGLRenderer\headers;D:\Cpp\Libraries\SFML-2.6.1\include;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -131,40 +131,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Animator.cpp" />
-    <ClCompile Include="AssimpImport.cpp" />
-    <ClCompile Include="Bunny.cpp" />
-    <ClCompile Include="BusNode.cpp" />
-    <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="EventBus.cpp" />
-    <ClCompile Include="glad.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="Mesh3D.cpp" />
-    <ClCompile Include="Object3D.cpp" />
-    <ClCompile Include="Renderer.cpp" />
-    <ClCompile Include="Room.cpp" />
-    <ClCompile Include="ShaderProgram.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Animation.h" />
-    <ClInclude Include="Animator.h" />
-    <ClInclude Include="AssimpImport.h" />
-    <ClInclude Include="Bunny.h" />
-    <ClInclude Include="BusNode.h" />
-    <ClInclude Include="Camera.h" />
-    <ClInclude Include="EventBus.h" />
-    <ClInclude Include="Events.h" />
     <ClInclude Include="glad\glad.h" />
+    <ClInclude Include="headers\Animation.h" />
+    <ClInclude Include="headers\Animator.h" />
+    <ClInclude Include="headers\AssimpImport.h" />
+    <ClInclude Include="headers\Bunny.h" />
+    <ClInclude Include="headers\BusNode.h" />
+    <ClInclude Include="headers\Camera.h" />
+    <ClInclude Include="headers\EventBus.h" />
+    <ClInclude Include="headers\Events.h" />
+    <ClInclude Include="headers\Mesh3D.h" />
+    <ClInclude Include="headers\Object3D.h" />
+    <ClInclude Include="headers\ObjectID.h" />
+    <ClInclude Include="headers\Renderer.h" />
+    <ClInclude Include="headers\Room.h" />
+    <ClInclude Include="headers\RotationAnimation.h" />
+    <ClInclude Include="headers\ShaderProgram.h" />
+    <ClInclude Include="headers\Texture.h" />
+    <ClInclude Include="headers\TranslationAnimation.h" />
     <ClInclude Include="KHR\khrplatform.h" />
-    <ClInclude Include="Mesh3D.h" />
-    <ClInclude Include="Object3D.h" />
-    <ClInclude Include="ObjectID.h" />
-    <ClInclude Include="Renderer.h" />
-    <ClInclude Include="Room.h" />
-    <ClInclude Include="RotationAnimation.h" />
-    <ClInclude Include="ShaderProgram.h" />
-    <ClInclude Include="Texture.h" />
-    <ClInclude Include="TranslationAnimation.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\all_green.frag" />
@@ -175,6 +160,21 @@
     <None Include="shaders\texturing.frag" />
     <None Include="show_mesh.frag" />
     <None Include="show_mesh.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="source\Animator.cpp" />
+    <ClCompile Include="source\AssimpImport.cpp" />
+    <ClCompile Include="source\Bunny.cpp" />
+    <ClCompile Include="source\BusNode.cpp" />
+    <ClCompile Include="source\Camera.cpp" />
+    <ClCompile Include="source\EventBus.cpp" />
+    <ClCompile Include="source\glad.cpp" />
+    <ClCompile Include="source\main.cpp" />
+    <ClCompile Include="source\Mesh3D.cpp" />
+    <ClCompile Include="source\Object3D.cpp" />
+    <ClCompile Include="source\Renderer.cpp" />
+    <ClCompile Include="source\Room.cpp" />
+    <ClCompile Include="source\ShaderProgram.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

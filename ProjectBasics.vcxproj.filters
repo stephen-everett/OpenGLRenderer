@@ -15,102 +15,61 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Animator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="AssimpImport.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="glad.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Mesh3D.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Object3D.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ShaderProgram.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BusNode.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="EventBus.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Renderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Bunny.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Room.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Animation.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Animator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AssimpImport.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Mesh3D.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Object3D.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RotationAnimation.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ShaderProgram.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TranslationAnimation.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="glad\glad.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
     <ClInclude Include="KHR\khrplatform.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
-    <ClInclude Include="BusNode.h">
+    <ClInclude Include="headers\Animation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="EventBus.h">
+    <ClInclude Include="headers\Animator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Events.h">
+    <ClInclude Include="headers\AssimpImport.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Renderer.h">
+    <ClInclude Include="headers\Bunny.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Bunny.h">
+    <ClInclude Include="headers\BusNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Camera.h">
+    <ClInclude Include="headers\Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ObjectID.h">
+    <ClInclude Include="headers\EventBus.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Room.h">
+    <ClInclude Include="headers\Events.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\Mesh3D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\Object3D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\ObjectID.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\Renderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\Room.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\RotationAnimation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\ShaderProgram.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\Texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\TranslationAnimation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -139,5 +98,46 @@
     <None Include="show_mesh.frag">
       <Filter>Resource Files</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="source\Animator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\AssimpImport.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Bunny.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\BusNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\EventBus.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\glad.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Mesh3D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Object3D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Room.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\ShaderProgram.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
