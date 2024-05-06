@@ -13,7 +13,8 @@ protected:
 	void onNotify(Event event);
 	std::shared_ptr<Object3D> model;
 private:
-	std::shared_ptr<Animator> animator;
+	Animator animator;
 	sf::Time time;
 	sf::Clock c;
+	bool isAnimated;
 };
