@@ -1,8 +1,11 @@
 #include "Room.h"
 #include "Mesh3D.h"
 #include "Texture.h"
+#include "AssimpImport.h"
 
 Room::Room(EventBus* eventBus) : BusNode(ROOM,eventBus) {
+	// This block of code is to create a cube to act as a room
+	/*
 	sf::Image image;
 	image.loadFromFile("models/wall.jpg");
 	texture = texture.loadImage(image, "baseTexture");
@@ -19,6 +22,13 @@ Room::Room(EventBus* eventBus) : BusNode(ROOM,eventBus) {
 	model->move(glm::vec3(0, 0, -3));
 
 	model->setScale(glm::vec3(5.0f, 5.0f, 5.0f));
+	std::shared_ptr<struct Event>  register_object = std::make_shared<Event>(USER, R_REGISTER, RENDERER, static_cast<void*>(model.get()));
+	eventBus->sendMessage(register_object);
+	*/
+
+	// This block of code uses assimp to load a pre-defined mesh
+	model = assimpLoad("models/sibenik/sibenik.obj", true);
+	model->move(glm::vec3(0, 15, -3));
 	std::shared_ptr<struct Event>  register_object = std::make_shared<Event>(USER, R_REGISTER, RENDERER, static_cast<void*>(model.get()));
 	eventBus->sendMessage(register_object);
 

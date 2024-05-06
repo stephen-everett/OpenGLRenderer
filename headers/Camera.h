@@ -31,6 +31,8 @@ private:
 
 	float speed;
 
+	bool locked;
+
 	void updatePosition();
 	void updateLookAt();
 

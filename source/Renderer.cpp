@@ -42,7 +42,7 @@ Renderer::Renderer(EventBus* eventBus) : BusNode(RENDERER,eventBus) {
 	//shaders[1].setUniform("view", camera->getCamera());
 	//shaders[1].setUniform("projection", perspective);
 
-	glm::vec4 material = glm::vec4(0.001, .001, 0.1, 32); // TODO, change for each model
+	glm::vec4 material = glm::vec4(0.001, .001, 0.001, 4); // TODO, change for each model
 	glm::vec3 ambientColor = glm::vec3(255, 255, 255); // ambient light color
 
 	glm::vec3 directionalLight = glm::vec3(0, -1, 0); // direction of light

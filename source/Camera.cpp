@@ -7,7 +7,7 @@ Camera::Camera(EventBus* eventBus, std::shared_ptr<sf::RenderWindow> rwindow) : 
 	pitch = 0.0f;
 	yaw = -90.0f;
 
-	pos = glm::vec3(0, 0, 3);
+	pos = glm::vec3(0, 0, 0);
 	float look_x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
 	float look_y = sin(glm::radians(pitch));
 	float look_z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
@@ -25,6 +25,7 @@ Camera::Camera(EventBus* eventBus, std::shared_ptr<sf::RenderWindow> rwindow) : 
 	movingForward = false;
 	movingBackward = false;
 
+	locked = false;
 
 
 
@@ -39,8 +40,10 @@ glm::vec3 Camera::getLocation() {
 }
 
 void Camera::update() {
-	updateLookAt();
-	updatePosition();
+	if (!locked) {
+		updateLookAt();
+		updatePosition();
+	}
 }
 
 void Camera::updateLookAt() {
@@ -146,6 +149,10 @@ void Camera::onNotify(Event event) {
 			else if (ev.key.scancode == sf::Keyboard::Scan::LControl) {
 				std::cout << "CAMERA: LEFT CONTROL PRESSED" << std::endl;
 				movingDown = true;
+			}
+			else if (ev.key.scancode == sf::Keyboard::Scan::L) {
+				//std::cout << "CAMERA: LEFT CONTROL PRESSED" << std::endl;
+				locked = !locked;
 			}
 		}
 		else if (ev.type == sf::Event::KeyReleased) {
