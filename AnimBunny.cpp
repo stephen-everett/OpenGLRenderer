@@ -9,17 +9,37 @@ AnimBunny::AnimBunny(EventBus* eventBus) : BusNode(ANIMBUNNY, eventBus) {
 	eventBus->sendMessage(register_object);
 	time = c.getElapsedTime();
 	
+	// For sequential animation loading
+	//animator.addAnimation(
+	//	[obj]() {
+	//		return std::make_shared<TranslationAnimation>(obj, 1, glm::vec3(4, -3, -15));
+	//	}
+	//);
+	//// then moves exactly to(-1, -1, -1)
+	//animator.addAnimation(
+	//	[obj]() {
+	//		return std::make_shared<TranslationAnimation>(obj, 1, glm::vec3(-1, -1, -1) * obj->getPosition());
+	//	}
+	//);
+
+	// For combined animation loading
+	// 
+	// Make vector of animation objects
+	std::vector<std::shared_ptr<Animation>> anims;
+
+	// Load animations into vector
+	anims.push_back(std::make_unique<TranslationAnimation>(obj, 1, glm::vec3(0, 3, 0)));
+	anims.push_back(std::make_unique<RotationAnimation>(obj, 1, glm::vec3(0, 2 * M_PI, 0)));
+
+	auto combinedAnim = std::make_unique<CombinedAnimation>(obj, anims);
+
 	animator.addAnimation(
-		[obj]() {
-			return std::make_shared<TranslationAnimation>(obj, 1, glm::vec3(4, -3, -15));
+		[&combinedAnim]() {
+			return std::move(combinedAnim);
 		}
 	);
-	// then moves exactly to(-1, -1, -1)
-	animator.addAnimation(
-		[obj]() {
-			return std::make_shared<TranslationAnimation>(obj, 1, glm::vec3(-1, -1, -1) * obj->getPosition());
-		}
-	);
+
+
 	animator.start();
 }
 

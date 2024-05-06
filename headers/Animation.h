@@ -58,4 +58,9 @@ public:
 		startAnimation();
 	}
 
+	/**
+	 * @brief Stops the animation.
+	 */
+	void stop() {}
+
 };

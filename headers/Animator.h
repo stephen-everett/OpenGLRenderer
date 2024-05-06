@@ -5,7 +5,7 @@
 #include "TranslationAnimation.h"
 //#include "BezierTranslationAnimation.h"
 //#include "PauseAnimation.h"
-//#include "CombinedAnimation.h"
+#include "CombinedAnimation.h"
 #include <functional>
 
 class Animator {
