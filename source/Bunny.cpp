@@ -2,7 +2,7 @@
 #include "AssimpImport.h"
 
 Bunny::Bunny(EventBus* eventBus) : BusNode(BUNNY, eventBus) {
-	model = assimpLoad("models/sibenik/sibenik.obj", true);
+	model = assimpLoad("models/bunny_textured.obj", true);
 	model->move(glm::vec3(0, 0, -3));
 	std::shared_ptr<struct Event>  register_object = std::make_shared<Event>(USER, R_REGISTER, RENDERER, static_cast<void*>(model.get()));
 	eventBus->sendMessage(register_object);

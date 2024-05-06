@@ -10,7 +10,7 @@ class Animation {
 private:
 	float_t m_duration;
 	float_t m_currentTime;
-	Object3D& m_object;
+	std::shared_ptr<Object3D> m_object;
 
 	/**
 	 * @brief Called when the animation is activated by an Animator.
@@ -23,7 +23,7 @@ private:
 	virtual void applyAnimation(float_t dt) = 0;
 
 public:
-	Animation(Object3D& obj, float_t duration) : m_object(obj), m_duration(duration),
+	Animation(std::shared_ptr <Object3D> obj, float_t duration) : m_object(obj), m_duration(duration),
 		m_currentTime(-1) {
 	}
 
@@ -40,7 +40,7 @@ public:
 	/**
 	* @brief The object the animation is manipulating.
 	*/
-	Object3D& object() const { return m_object; }
+	std::shared_ptr<Object3D> object() const { return m_object; }
 
 	/**
 	* @brief Advances the animation by the given interval, in seconds.

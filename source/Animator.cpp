@@ -1,11 +1,15 @@
-	#include "Animator.h"
+#include "Animator.h"
 
+//	In nextAnimation(), instead of accessing an Animation directly from the Animator's list, 
+// you will instead access and invoke a function from the Animator's list.Pass the Animator's 
+// object to the function, and accept back an std::unique_ptr to an Animation object, which 
+// you will store in your new m_currentAnimation field.
 void Animator::nextAnimation() {
 	// Increase the animation index, and start the next animation if there is one.
 	++m_currentIndex;
 
 	if (m_currentIndex < m_animations.size()) {
-		m_currentAnimation = m_animations[m_currentIndex].get();
+		m_currentAnimation = m_animations[m_currentIndex]();
 		m_currentAnimation->start();
 		m_nextTransition = m_nextTransition + m_currentAnimation->duration();
 	}

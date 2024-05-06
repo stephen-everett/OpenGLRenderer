@@ -9,5 +9,6 @@ enum ObjectID {
 	BUNNY,
 	RENDERER,
 	CAMERA,
-	ROOM
+	ROOM,
+	ANIMBUNNY
 };

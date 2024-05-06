@@ -2,6 +2,11 @@
 #include <memory>
 #include "Animation.h"
 #include "RotationAnimation.h"
+#include "TranslationAnimation.h"
+//#include "BezierTranslationAnimation.h"
+//#include "PauseAnimation.h"
+//#include "CombinedAnimation.h"
+#include <functional>
 
 class Animator {
 private:
@@ -16,16 +21,28 @@ private:
 	/**
 	 * @brief The sequence of animations to play.
 	 */
-	std::vector<std::unique_ptr<Animation>> m_animations;
+	 //std::vector<std::unique_ptr<Animation>> m_animations;
+
+	 // Instead of a std::vector of Animation pointers, Animator needs a std::vector of 
+	 // std::function objects.The functions should be of type 
+	 // std::function<std::unique_ptr<Animation>(void)>;
+
+	std::vector<std::function<std::shared_ptr<Animation>(void)>> m_animations;
+
 	/**
 	 * @brief The current (active) animation.
 	 */
-	Animation* m_currentAnimation;
+	 //Animation* m_currentAnimation;
+
+	 // Change the type of the m_currentAnimation field to std::unique_ptr<Animation>.
+	 // This will keep track of the active animation.
+	std::shared_ptr<Animation> m_currentAnimation;
+
 	/**
 	 * @brief The index of the current animation.
 	 */
 	int32_t m_currentIndex;
-	
+
 	/**
 	 * @brief Activate the next animation.
 	 */
@@ -38,14 +55,18 @@ public:
 	Animator() :
 		m_currentTime(0),
 		m_nextTransition(0),
-		m_currentIndex(-1), 
+		m_currentIndex(-1),
 		m_currentAnimation(nullptr) {
 	}
 
 	/**
 	 * @brief Add an Animation to the end of the animation sequence.
 	 */
-	void addAnimation(std::unique_ptr<Animation> animation) {
+	 /*void addAnimation(std::unique_ptr<Animation> animation) {
+		 m_animations.emplace_back(std::move(animation));
+	 }*/
+
+	void addAnimation(std::function<std::shared_ptr<Animation>(void)> animation) {
 		m_animations.emplace_back(std::move(animation));
 	}
 

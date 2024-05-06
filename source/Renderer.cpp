@@ -114,6 +114,19 @@ bool Renderer::pollEvents() {
 			window->close();
 			return false;
 		}
+		else if (ev.type == sf::Event::KeyPressed) {
+			switch (ev.key.code) {
+			case sf::Keyboard::Escape:
+				window->close();
+				return false;
+				break;
+			default:
+				//sf::Event key_event = ev;
+				std::shared_ptr<struct Event> new_event = std::make_shared<Event>(SFML, ev, GLOBAL);
+				eventBus->sendMessage(new_event);
+				break;
+			}
+		}
 		else {
 			//sf::Event key_event = ev;
 			std::shared_ptr<struct Event> new_event = std::make_shared<Event>(SFML, ev, GLOBAL);
