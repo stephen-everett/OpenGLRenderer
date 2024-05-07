@@ -10,7 +10,8 @@ enum ObjectID {
 	RENDERER,
 	CAMERA,
 	ROOM,
-	ANIMBUNNY
+	ANIMBUNNY,
+	GMAN
 };
 
 #ifndef M_PI

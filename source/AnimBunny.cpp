@@ -10,26 +10,26 @@ AnimBunny::AnimBunny(EventBus* eventBus) : BusNode(ANIMBUNNY, eventBus) {
 	time = c.getElapsedTime();
 	
 	// For sequential animation loading
-	//animator.addAnimation(
-	//	[obj]() {
-	//		return std::make_shared<TranslationAnimation>(obj, 1, glm::vec3(4, -3, -15));
-	//	}
-	//);
-	//// then moves exactly to(-1, -1, -1)
-	//animator.addAnimation(
-	//	[obj]() {
-	//		return std::make_shared<TranslationAnimation>(obj, 1, glm::vec3(-1, -1, -1) * obj->getPosition());
-	//	}
-	//);
+	/*animator.addAnimation(
+		[obj]() {
+			return std::make_shared<TranslationAnimation>(obj, 2, glm::vec3(0, 3, 0));
+		}
+	);
+	// then moves exactly to(-1, -1, -1)
+	animator.addAnimation(
+		[obj]() {
+			return std::make_shared<TranslationAnimation>(obj, 1, glm::vec3(-1, -1, -1) * obj->getPosition());
+		}
+	);*/
 
 	// For combined animation loading
 	// 
 	// Make vector of animation objects
-	std::vector<std::shared_ptr<Animation>> anims;
+	/*std::vector<std::shared_ptr<Animation>> anims;
 
 	// Load animations into vector
-	anims.push_back(std::make_unique<TranslationAnimation>(obj, 1, glm::vec3(0, 3, 0)));
-	anims.push_back(std::make_unique<RotationAnimation>(obj, 1, glm::vec3(0, 2 * M_PI, 0)));
+	anims.push_back(std::make_unique<TranslationAnimation>(obj, 5, glm::vec3(0, 3, 0)));
+	anims.push_back(std::make_unique<RotationAnimation>(obj, 5, glm::vec3(0, 2 * M_PI, 0)));
 
 	auto combinedAnim = std::make_unique<CombinedAnimation>(obj, anims);
 
@@ -37,8 +37,43 @@ AnimBunny::AnimBunny(EventBus* eventBus) : BusNode(ANIMBUNNY, eventBus) {
 		[&combinedAnim]() {
 			return std::move(combinedAnim);
 		}
+	);*/
+	
+	// ALL MOVEMENT TESTS
+	// MOVE
+	animator.addAnimation(
+		[obj]() {
+			return std::make_shared<TranslationAnimation>(obj, 2, glm::vec3(0, 3, 0));
+		}
 	);
-
+	// PAUSE
+	animator.addAnimation(
+		[obj]() {
+			return std::make_shared<PauseAnimation>(obj, 2);
+		}
+	);
+	// ROTATE
+	animator.addAnimation(
+		[obj]() {
+			return std::make_shared<RotationAnimation>(obj, 2, glm::vec3(0, 2 * M_PI, 0));
+		}
+	);
+	// RESET POSITION
+	animator.addAnimation(
+		[obj]() {
+			return std::make_shared<TranslationAnimation>(obj, 1, glm::vec3(-1, -1, -1) * obj->getPosition());
+		}
+	);
+	// BEZIER CURVE
+	animator.addAnimation(
+		[obj]() {
+			return std::make_unique<BezierTranslationAnimation>(obj, 3,
+			glm::vec3(0, 0, 0),
+			glm::vec3(0, 2, 0),
+			glm::vec3(2, 2, 0),
+			glm::vec3(2, 0, 0));
+		}
+	);
 
 	animator.start();
 }
