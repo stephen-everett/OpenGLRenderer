@@ -10,7 +10,9 @@ enum EventType {
 enum EventEnums {
 	TEST_EVENT,
 	UPDATE,
-	R_REGISTER
+	R_REGISTER,
+	I_REGISTER,
+	CI_REGISTER
 };
 
 

@@ -100,7 +100,7 @@ void Renderer::render() {
 
 	//shaders[1].setUniform("view", camera->getCamera());
 	//shaders[0].setUniform("viewPos", camera->getLocation());
-	for(auto object : render_objects) {
+	for(std::shared_ptr<Object3D> object : render_objects) {
 		object->render(*window, shaders[0]);
 		//object->render(*window, shaders[1]);
 	}
