@@ -8,7 +8,6 @@ public:
     virtual void update();
     EventBus* getBus();
     void setBus(EventBus* bus);
-    void initializeEvents();
     void sendEvent(EventType type, std::variant<sf::Event, EventEnums> passed_event, int receiver);
 protected:
     EventBus* eventBus;

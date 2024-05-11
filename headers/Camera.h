@@ -19,6 +19,7 @@ private:
 	glm::vec3 look;
 	glm::vec3 up;
 
+	std::shared_ptr<glm::vec3> shared_pos;
 	float pitch;
 	float yaw;
 

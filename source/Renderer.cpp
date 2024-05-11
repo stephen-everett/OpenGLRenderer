@@ -10,7 +10,7 @@ Renderer::Renderer(EventBus* eventBus) : BusNode(RENDERER,eventBus) {
 	window = std::make_shared<sf::RenderWindow>(sf::VideoMode{ 1000, 1000 }, "SFML Demo", sf::Style::Resize | sf::Style::Close, Settings);
 	camera = std::make_unique<Camera>(eventBus, window);
 	gladLoadGL();
-	glEnable(GL_TEXTURE_2D); //  when uncommented, triangle is grey. When commented triangle is white
+	//glEnable(GL_TEXTURE_2D); //  when uncommented, triangle is grey. When commented triangle is white
 
 	// Load shaders and bind them for use.
 	ShaderProgram defaultShader;
@@ -42,7 +42,7 @@ Renderer::Renderer(EventBus* eventBus) : BusNode(RENDERER,eventBus) {
 	//shaders[1].setUniform("view", camera->getCamera());
 	//shaders[1].setUniform("projection", perspective);
 
-	glm::vec4 material = glm::vec4(0.001, .001, 0.001, 4); // TODO, change for each model
+	glm::vec4 material = glm::vec4(0.001, .001, 0.001, 32); // TODO, change for each model
 	glm::vec3 ambientColor = glm::vec3(255, 255, 255); // ambient light color
 
 	glm::vec3 directionalLight = glm::vec3(0, -1, 0); // direction of light
@@ -93,14 +93,14 @@ void Renderer::onNotify(Event event) {
 }
 
 void Renderer::render() {
-	window->clear();
+	//window->clear();
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	shaders[0].setUniform("view", camera->getCamera());
 	shaders[0].setUniform("viewPos", camera->getLocation());
 
 	//shaders[1].setUniform("view", camera->getCamera());
 	//shaders[0].setUniform("viewPos", camera->getLocation());
-	for(auto object : render_objects) {
+	for(std::shared_ptr<Object3D> object : render_objects) {
 		object->render(*window, shaders[0]);
 		//object->render(*window, shaders[1]);
 	}

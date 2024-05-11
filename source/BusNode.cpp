@@ -36,10 +36,6 @@ void BusNode::setBus(EventBus* bus) {
     eventBus = bus;
 }
 
-void BusNode::initializeEvents() {
-    
-}
-
 void BusNode::sendEvent(EventType type, std::variant<sf::Event, EventEnums> passed_event, int receiver) {
     std::shared_ptr<struct Event> new_event = std::make_shared<Event>(type, passed_event, receiver);
     eventBus->sendMessage(new_event);

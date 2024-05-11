@@ -3,6 +3,7 @@ This application renders a textured mesh that was loaded with Assimp.
 */
 #include "EventBus.h"
 #include "Bunny.h"
+#include "Interactor.h"
 #include "Renderer.h"
 #include "Room.h"
 #include "AnimBunny.h"
@@ -13,6 +14,7 @@ int main() {
 	// event bus and renderer must be declared first before other objects
 	EventBus event_bus;
 	Renderer renderer(&event_bus);
+	Interactor interactor(&event_bus);
 
 	// other objects
 	//Bunny bunny(&event_bus);
