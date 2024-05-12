@@ -89,7 +89,7 @@ std::shared_ptr<Object3D> assimpLoad(const std::string& path, bool flipTextureCo
 
 	auto options = aiProcessPreset_TargetRealtime_MaxQuality;
 	if (flipTextureCoords) {
-		options |= aiProcess_FlipUVs;
+		options |= aiProcess_FlipUVs; // what is happening here?
 	}
 	const aiScene* scene = importer.ReadFile(path, options);
 

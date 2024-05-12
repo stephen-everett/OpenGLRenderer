@@ -17,6 +17,7 @@ Renderer::Renderer(EventBus* eventBus) : BusNode(RENDERER,eventBus) {
 	shaders.push_back(defaultShader);
 	try {
 		shaders[0].load("shaders/texture_perspective.vert", "shaders/texturing.frag");
+		//shaders[0].load("shaders/texture_perspective.vert", "shaders/all_green.frag");
 	}
 	catch (std::runtime_error& e) {
 		std::cout << "ERROR: " << e.what() << std::endl;
@@ -42,11 +43,11 @@ Renderer::Renderer(EventBus* eventBus) : BusNode(RENDERER,eventBus) {
 	//shaders[1].setUniform("view", camera->getCamera());
 	//shaders[1].setUniform("projection", perspective);
 
-	glm::vec4 material = glm::vec4(0.001, .001, 0.001, 32); // TODO, change for each model
-	glm::vec3 ambientColor = glm::vec3(255, 255, 255); // ambient light color
+	glm::vec4 material = glm::vec4(0.8, 0.7, 1, 16); // TODO, change for each model
+	glm::vec3 ambientColor = glm::vec3(0.75, 0.8, 1); // ambient light color
 
 	glm::vec3 directionalLight = glm::vec3(0, -1, 0); // direction of light
-	glm::vec3 directionalColor = glm::vec3(255, 255, 255); // directional light color
+	glm::vec3 directionalColor = glm::vec3(1, 0.2, 0.2); // directional light color
 
 	shaders[0].setUniform("material", material);
 	shaders[0].setUniform("ambientColor", ambientColor);
@@ -60,6 +61,7 @@ Renderer::Renderer(EventBus* eventBus) : BusNode(RENDERER,eventBus) {
 	glClearDepth(1.f);
 
 	mouseLock = true;
+	window->setMouseCursorVisible(false);
 
 }
 

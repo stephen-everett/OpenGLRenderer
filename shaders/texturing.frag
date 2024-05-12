@@ -51,5 +51,5 @@ void main() {
     //FragColor = texture(baseTexture, TexCoord);
     vec3 lightIntensity = ambientIntensity + diffuseIntensity + specularIntensity;
     FragColor = vec4(lightIntensity, 1) * texture(baseTexture, TexCoord);
-    //FragColor = vec4(255,0,0,0);
+    //FragColor = vec4(1,0,0,1);
 }
