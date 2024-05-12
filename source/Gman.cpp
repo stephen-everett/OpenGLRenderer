@@ -2,7 +2,7 @@
 #include "AssimpImport.h"
 
 Gman::Gman(EventBus* eventBus) : BusNode(GMAN, eventBus) {
-	model = assimpLoad("models/gman/gman_upperbody.obj", true);
+	model = assimpLoad("models/gman/gman_torso.obj", true);
 	model->move(glm::vec3(0, 0, -3));
 	std::shared_ptr<struct Event>  register_object = std::make_shared<Event>(USER, R_REGISTER, RENDERER, static_cast<void*>(model.get()));
 	eventBus->sendMessage(register_object);

@@ -11,7 +11,9 @@ enum ObjectID {
 	CAMERA,
 	ROOM,
 	ANIMBUNNY,
-	GMAN
+	INTERACTOR,
+	GMAN,
+	BUNNY1
 };
 
 #ifndef M_PI

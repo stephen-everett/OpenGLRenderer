@@ -2,6 +2,7 @@
 #include "Object3D.h"
 #include "Animation.h"
 #include <glm/glm.hpp>
+#include <iostream>
 
 /**
  * @brief Animates an object along a cubic Bezier curve over a given duration.
@@ -22,7 +23,7 @@ private:
     void applyAnimation(float_t dt) override {
         if (firstUpdate) {
             initialPosition = object()->getPosition(); // Capture the initial position at the start
-            //std::cout << "Initial Position: " << initialPosition.x << ", " << initialPosition.y << ", " << initialPosition.z << std::endl;
+            std::cout << "Initial Position: " << initialPosition.x << ", " << initialPosition.y << ", " << initialPosition.z << std::endl;
             firstUpdate = false;
         }
 
