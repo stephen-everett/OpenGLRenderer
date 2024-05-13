@@ -17,4 +17,6 @@ private:
 	sf::Time time;
 	sf::Clock c;
 	bool isAnimated;
+	void playAnimation();
+	float elapsedTime;
 };

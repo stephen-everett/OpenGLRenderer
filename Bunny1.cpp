@@ -11,6 +11,8 @@ Bunny1::Bunny1(EventBus* eventBus) : BusNode(BUNNY1, eventBus) {
 	std::shared_ptr<struct Event>  register_object = std::make_shared<Event>(USER, R_REGISTER, RENDERER, static_cast<void*>(model.get()));
 	eventBus->sendMessage(register_object);
 	time = c.getElapsedTime();
+	elapsedTime = 0;
+	isAnimated = false;
 
 
 	// For sequential animation loading
@@ -195,10 +197,7 @@ Bunny1::Bunny1(EventBus* eventBus) : BusNode(BUNNY1, eventBus) {
 		animator.addAnimation([animLeftStep]() { return animLeftStep; });
 		//animator.addAnimation([obj]() { return std::make_shared<PauseAnimation>(obj, 0.5); });
 	}
-	
 
-
-	animator.start();
 }
 
 void Bunny1::render(sf::RenderWindow& window, ShaderProgram& shaderProgram) const {
@@ -208,14 +207,35 @@ void Bunny1::render(sf::RenderWindow& window, ShaderProgram& shaderProgram) cons
 void Bunny1::update() {
 	auto now = c.getElapsedTime();
 	auto diff = now - time;
+	
 	animator.tick(diff.asSeconds());
 	time = now;
+	if (isAnimated) {
+		elapsedTime += diff.asSeconds();
+		if (elapsedTime >= 1 && elapsedTime < 2) {
+			std::shared_ptr<struct Event>  play_sound = std::make_shared<Event>(USER, PLAY_SOUND, SOUND);
+			eventBus->sendMessage(play_sound);
+		}
+		else if (elapsedTime >= 2 && elapsedTime <= 3) {
+			std::shared_ptr<struct Event>  play_sound = std::make_shared<Event>(USER, PLAY_SOUND, SOUND);
+			eventBus->sendMessage(play_sound);
+		}
+		else {
+			elapsedTime = 0;
+			isAnimated = false;
+		}
+	}
 }
 
 void Bunny1::onNotify(Event event) {
 	switch (event.event_type) {
 	case SFML:
 		sf::Event sf_event = get<sf::Event>(event.event);
+		if (sf_event.type == sf::Event::KeyPressed) {
+			if (sf_event.key.scancode == sf::Keyboard::Scan::T) {
+				playAnimation();
+			}
+		}
 		break;
 	case USER:
 		EventEnums ev = get<EventEnums>(event.event);
@@ -224,4 +244,11 @@ void Bunny1::onNotify(Event event) {
 		}
 		break;
 	}
+}
+
+void Bunny1::playAnimation() {
+	animator.start();
+	isAnimated = true;
+	std::shared_ptr<struct Event>  play_sound = std::make_shared<Event>(USER, PLAY_SOUND, SOUND);
+	eventBus->sendMessage(play_sound);
 }

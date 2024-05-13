@@ -13,7 +13,8 @@ enum ObjectID {
 	ANIMBUNNY,
 	INTERACTOR,
 	GMAN,
-	BUNNY1
+	BUNNY1,
+	SOUND
 };
 
 #ifndef M_PI

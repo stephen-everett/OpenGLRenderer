@@ -9,6 +9,7 @@ This application renders a textured mesh that was loaded with Assimp.
 #include "AnimBunny.h"
 #include "Gman.h"
 #include "Bunny1.h"
+#include "Sound.h"
 
 
 int main() {
@@ -16,6 +17,7 @@ int main() {
 	EventBus event_bus;
 	Renderer renderer(&event_bus);
 	//Interactor interactor(&event_bus);
+	Sound sound(&event_bus);
 
 	// other objects
 	//Bunny bunny(&event_bus);
