@@ -100,6 +100,7 @@ void Camera::updatePosition() {
 void Camera::moveForward() {
 	pos += speed * look;
 	//std::cout << "Moving camera forward..." << std::endl;
+	//std::cout << "Current Position: " << pos.x << ", " <<  pos.y << ", " <<  pos.z << std::endl;
 }
 
 void Camera::moveBackwards() {
@@ -158,6 +159,10 @@ void Camera::onNotify(Event event) {
 			else if (ev.key.scancode == sf::Keyboard::Scan::L) {
 				//std::cout << "CAMERA: LEFT CONTROL PRESSED" << std::endl;
 				locked = !locked;
+			}
+			else if (ev.key.scancode == sf::Keyboard::Scan::J) {
+				//std::cout << "CAMERA: LEFT CONTROL PRESSED" << std::endl;
+				std::cout << "Camera Pos: " << pos.x << ", " << pos.y << " " << pos.z << " " << std::endl;
 			}
 		}
 		else if (ev.type == sf::Event::KeyReleased) {

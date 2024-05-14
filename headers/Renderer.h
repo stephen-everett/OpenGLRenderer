@@ -22,4 +22,7 @@ private:
 	glm::mat4 perspective;
 	bool mouseLock;
 
+	glm::vec3 lightPos;
+	bool forward;
+
 };
