@@ -27,7 +27,7 @@ Room::Room(EventBus* eventBus) : BusNode(ROOM,eventBus) {
 	*/
 
 	// This block of code uses assimp to load a pre-defined mesh
-	model = assimpLoad("models/sibenik/sibenik.obj", true);
+	model = assimpLoad("models/sibenik/sibenik.obj", false);
 	model->move(glm::vec3(0, 15, -3));
 	std::shared_ptr<struct Event>  register_object = std::make_shared<Event>(USER, R_REGISTER, RENDERER, static_cast<void*>(model.get()));
 	eventBus->sendMessage(register_object);

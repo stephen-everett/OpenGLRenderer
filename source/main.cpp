@@ -7,6 +7,7 @@ This application renders a textured mesh that was loaded with Assimp.
 #include "Renderer.h"
 #include "Room.h"
 #include "AnimBunny.h"
+#include "Table.h"
 
 
 int main() {
@@ -19,6 +20,9 @@ int main() {
 	Bunny bunny(&event_bus);
 	Room room(&event_bus);
 	//AnimBunny animbunny(&event_bus);
+
+	Table table(&event_bus);
+
 
 	// main loop
 	bool running = true;

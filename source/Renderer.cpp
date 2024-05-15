@@ -22,9 +22,9 @@ Renderer::Renderer(EventBus* eventBus) : BusNode(RENDERER,eventBus) {
 	// Load shaders and bind them for use.
 
 	// shared parameters
-	glm::vec4 material = glm::vec4(0.1, 0.0, 0.0, 3); // TODO, change for each model
+	glm::vec4 material = glm::vec4(0.1, 0.3, 1, 3); // TODO, change for each model
 	glm::vec3 ambientColor = glm::vec3(0.8, 0.8, 1); // ambient light color
-	glm::vec3 directionalLight = glm::vec3(0, -1, 0); // direction of light
+	glm::vec3 directionalLight = glm::vec3(1, -1, -1); // direction of light
 	glm::vec3 directionalColor = glm::vec3(1, 1, 1); // directional light color
 	perspective = glm::perspective(glm::radians(45.0), static_cast<double>(window->getSize().x) / window->getSize().y, 0.1, 100.0);
 
@@ -56,14 +56,26 @@ Renderer::Renderer(EventBus* eventBus) : BusNode(RENDERER,eventBus) {
 	/**********************************************************************************
 	*	Multiple Light Shader
 	**********************************************************************************/
-
+	
 	// point light params
-	glm::vec4 point_material = glm::vec4(0.0, 1, 0.0, 16);
-	glm::vec3 position1 = glm::vec3(-0.255263, 2.41485, -0.898758);
-	lightPos = glm::vec3(-4.7, 0, -0.898758); // point light 2
+	glm::vec4 point_material = glm::vec4(0, 1, 0.3, 8);
 
-	glm::vec3 p_color1 = glm::vec3(1,0,0);
-	glm::vec3 p_color2 = glm::vec3(0,0,1);
+	glm::vec3 position1 = glm::vec3(-0.255263, 2.41485, -0.898758);
+	glm::vec3 p_color1 = glm::vec3(2, 0, 0);
+
+	glm::vec3 position2 = glm::vec3(-4.6, 1, 0.301242); // point light 2
+	glm::vec3 p_color2 = glm::vec3(0, 0, 2);
+
+	glm::vec3 position3 = glm::vec3(-8.4, 1, 0.301242);
+	glm::vec3 p_color3 = glm::vec3(0, 2, 0);
+
+	glm::vec3 position4 = glm::vec3(-12.2, 1, 0.301242);
+	glm::vec3 p_color4 = glm::vec3(2, 1, 2);
+
+	glm::vec3 position5 = glm::vec3(-12.3, 1.3, -6.99875);
+	glm::vec3 p_color5 = glm::vec3(1, 0, 1.75);
+
+	
 
 	float constant = 1.0f;
 	float linear = 0.09f;
@@ -89,16 +101,25 @@ Renderer::Renderer(EventBus* eventBus) : BusNode(RENDERER,eventBus) {
 	shaders[1].setUniform("ambientColor", ambientColor);
 	shaders[1].setUniform("directionalLight", directionalLight);
 	shaders[1].setUniform("directionalColor", directionalColor);
-	shaders[1].setUniform("position2", position1);
-	shaders[1].setUniform("position2", lightPos);
+
+	shaders[1].setUniform("position1", position1);
+	shaders[1].setUniform("position2", position2);
+	shaders[1].setUniform("position3", position3);
+	shaders[1].setUniform("position4", position4);
+	shaders[1].setUniform("position5", position5);
+	
 	shaders[1].setUniform("p_color1", p_color1);
 	shaders[1].setUniform("p_color2", p_color2);
+	shaders[1].setUniform("p_color3", p_color3);
+	shaders[1].setUniform("p_color4", p_color4);
+	shaders[1].setUniform("p_color5", p_color5);
+
 	shaders[1].setUniform("constant", constant);
 	shaders[1].setUniform("linear", linear);
 	shaders[1].setUniform("quadratic", quadratic);
 	shaders[1].setUniform("point_material", point_material);
 	
-
+	
 	// OpenGL setup
 	glEnable(GL_DEPTH_TEST);
 	glDepthMask(GL_TRUE);
@@ -161,7 +182,7 @@ void Renderer::render() {
 
 	shaders[1].setUniform("view", camera->getCamera());
 	shaders[1].setUniform("viewPos", camera->getLocation());
-	shaders[1].setUniform("position2", lightPos);
+	//shaders[1].setUniform("position2", lightPos);
 	//shaders[0].setUniform("view", camera->getCamera());
 	//shaders[0].setUniform("viewPos", camera->getLocation());
 
@@ -185,6 +206,7 @@ bool Renderer::pollEvents() {
 				window->close();
 				return false;
 				break;
+			/*
 			case sf::Keyboard::Up:
 				lightPos.y += 0.1;
 				std::cout << "Light Position: " << lightPos.x << ", " << lightPos.y << ", " << lightPos.z << std::endl;
@@ -209,6 +231,7 @@ bool Renderer::pollEvents() {
 				lightPos.z -= 0.1;
 				std::cout << "Light Position: " << lightPos.x << ", " << lightPos.y << ", " << lightPos.z << std::endl;
 				break;
+			*/
 			default:
 				//sf::Event key_event = ev;
 				std::shared_ptr<struct Event> new_event = std::make_shared<Event>(SFML, ev, GLOBAL);
