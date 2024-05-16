@@ -27,7 +27,7 @@ void main() {
     vec3 T = normalize(normalMatrix1* vTangent);
     vec3 N = normalize(normalMatrix1* vNormal);
     T = normalize(T - dot(T,N) * N);
-    vec3 B = cross(N,T);
+    vec3 B = normalize(cross(N,T));
     TBN = transpose(mat3(T,B,N));
 
     

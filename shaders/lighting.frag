@@ -54,7 +54,10 @@ void main() {
         normal = texture(normalMap, TexCoord).rgb;
         normal = normal * 2.0 - 1.0;
         normal = normalize(TBN * normal);
+        
     }
+    
+    
     
     
     

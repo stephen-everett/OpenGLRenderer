@@ -42,7 +42,7 @@ Brickwall::Brickwall(EventBus* eventBus) : BusNode(BRICKWALL, eventBus) {
 	//Object3D myObject(std::move(meshes));
 	model = std::make_shared<Object3D>(std::move(meshes));
 	model->move(glm::vec3(0, 0, -3));
-	model->setNorm(false);
+	model->setNorm(true);
 	model->setSpec(false);
 
 	model->setScale(glm::vec3(5.0f, 5.0f, 5.0f));
