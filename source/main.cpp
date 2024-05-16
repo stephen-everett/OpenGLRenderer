@@ -37,7 +37,7 @@ int main() {
 
 	Table table(&event_bus);
 	//Bunny1 bunny1(&event_bus);
-	//Brickwall brickwall(&event_bus);
+	Brickwall brickwall(&event_bus);
 
 
 	// main loop
