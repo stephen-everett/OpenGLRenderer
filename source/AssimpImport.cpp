@@ -45,11 +45,12 @@ Mesh3D fromAssimpMesh(const aiMesh* mesh, const aiScene* scene, const std::files
 				// tangents here
 				mesh->mNormals[i].x, mesh->mNormals[i].y, mesh->mNormals[i].z,
 				//mesh->mTangents[i].x, mesh->mTangents[i].y, mesh->mTangents[i].z,
-				mesh->mTextureCoords[0][i].x, mesh->mTextureCoords[0][i].y );
+				mesh->mTextureCoords[0][i].x, mesh->mTextureCoords[0][i].y,
+				mesh->mTangents[i].x, mesh->mTangents[i].y, mesh->mTangents[i].z);
 		}
 		else {
 			vertices.push_back({ mesh->mVertices[i].x, mesh->mVertices[i].y, mesh->mVertices[i].z,
-				0, 0, 1, 0, 0 });
+				0, 0, 1, 0, 0,0,0,0 });
 		}
 	}
 

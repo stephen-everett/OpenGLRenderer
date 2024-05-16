@@ -4,6 +4,7 @@ layout (location=0) in vec3 vPosition;
 layout (location=1) in vec3 vNormal; // use this for tbn matrix
 layout (location=2) in vec2 vTexCoord;
 // location 3 vtangent
+layout (location=3) in vec3 vTangent;
 
 uniform mat4 projection;
 uniform mat4 view;

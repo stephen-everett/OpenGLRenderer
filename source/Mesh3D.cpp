@@ -45,6 +45,10 @@ Mesh3D::Mesh3D(std::vector<Vertex3D>&& vertices, std::vector<uint32_t>&& faces, 
 	glVertexAttribPointer(2, 2, GL_FLOAT, false, sizeof(Vertex3D), (void*)24);
 	glEnableVertexAttribArray(2);
 
+	// Attribute 3 is tangent coordinates (tx, ty,tz): 2 contiguous floats, starting 30 bytes after the beginning of the vertex.
+	glVertexAttribPointer(3, 3, GL_FLOAT, false, sizeof(Vertex3D), (void*)30);
+	glEnableVertexAttribArray(3);
+
 	// Generate a second buffer, to store the indices of each triangle in the mesh.
 	uint32_t ebo;
 	glGenBuffers(1, &ebo);
@@ -76,6 +80,7 @@ void Mesh3D::render(sf::RenderWindow& window, ShaderProgram& program) const {
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
+/*
 Mesh3D Mesh3D::square(const std::vector<Texture> &textures) {
 	return Mesh3D(
 		{ 
@@ -136,18 +141,19 @@ void setNormals(vector<Vertex3D>& verts, const vector<uint32_t>& tris) {
 
 
 }
-
-Mesh3D Mesh3D::cube(Texture texture) {
-	std::vector<Vertex3D> verts = {
-		/*BUR*/{ 0.5, 0.5, -0.5, 0, 0, 0, 1, 0},
-		/*BUL*/{ -0.5, 0.5, -0.5, 0, 0, 0, 0, 0},
-		/*BLL*/{ -0.5, -0.5, -0.5, 0, 0, 0, 0, 1 },
-		/*BLR*/{ 0.5, -0.5, -0.5, 0, 0, 0, 1, 1.0},
-		/*FUR*/{ 0.5, 0.5, 0.5, 0, 0, 1, 1.0, 0},
-		/*FUL*/{-0.5, 0.5, 0.5, 0, 0, 1, 0, 0},
-		/*FLL*/{-0.5, -0.5, 0.5, 0, 0, 1, 0, 1.0},
-		/*FLR*/{0.5, -0.5, 0.5, 0, 0, 1, 1.0, 1.0}
-	};
+*/
+//Mesh3D Mesh3D::cube(Texture texture) {
+	//std::vector<Vertex3D> verts = {
+		/*BUR*///{ 0.5, 0.5, -0.5, 0, 0, 0, 1, 0},
+		/*BUL*///{ -0.5, 0.5, -0.5, 0, 0, 0, 0, 0},
+		/*BLL*///{ -0.5, -0.5, -0.5, 0, 0, 0, 0, 1 },
+		/*BLR*///{ 0.5, -0.5, -0.5, 0, 0, 0, 1, 1.0},
+		/*FUR*///{ 0.5, 0.5, 0.5, 0, 0, 1, 1.0, 0},
+		/*FUL*///{-0.5, 0.5, 0.5, 0, 0, 1, 0, 0},
+		/*FLL*///{-0.5, -0.5, 0.5, 0, 0, 1, 0, 1.0},
+		/*FLR*///{0.5, -0.5, 0.5, 0, 0, 1, 1.0, 1.0}
+	//};
+/*
 	std::vector<uint32_t> tris = {
 		0, 1, 2,
 		0, 2, 3,
@@ -167,3 +173,4 @@ Mesh3D Mesh3D::cube(Texture texture) {
 
 	return Mesh3D(std::move(verts),std::move(tris), texture);
 }
+*/

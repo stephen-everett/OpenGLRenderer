@@ -68,6 +68,7 @@ vec3 CalcDirLight(vec4 mat, vec3 view, vec3 amColor, vec3 dlight, vec3 dcolor) {
     vec3 diffuseIntensity = vec3(0);
     vec3 norm = normalize(Normal);
     vec3 lightDir = normalize(-dlight);
+    //vec3 lightDir = normalize(dlight);
 
     // specular intensity
     vec3 specularIntensity = vec3(0);
@@ -101,6 +102,7 @@ vec3 CalcPointLight(vec4 pmat,vec3 view, vec3 amColor, vec3 dlight, vec3 dcolor,
     float constant = 1.0;
     float linear = 0.35;
     float quadratic = 0.44;
+    dlight = -dlight;
 
     float distance = length(position - FragWorldPos);
     float attenuation = 1.0 / (constant + linear * distance + quadratic * (distance * distance));
