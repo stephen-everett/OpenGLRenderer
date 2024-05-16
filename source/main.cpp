@@ -35,9 +35,9 @@ int main() {
 	//Room room(&event_bus);
 	//AnimBunny animbunny(&event_bus);
 
-	//Table table(&event_bus);
+	Table table(&event_bus);
 	//Bunny1 bunny1(&event_bus);
-	Brickwall brickwall(&event_bus);
+	//Brickwall brickwall(&event_bus);
 
 
 	// main loop

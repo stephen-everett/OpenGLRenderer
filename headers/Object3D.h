@@ -27,6 +27,10 @@ private:
 	// Some objects from Assimp imports have a "name" field, useful for debugging.
 	std::string m_name;
 
+	// keep track of what maps are available
+	bool spec;
+	bool norm;
+
 	// Recomputes the local->world transformation matrix.
 	void rebuildModelMatrix();
 
@@ -44,6 +48,9 @@ public:
 	const glm::vec3& getCenter() const;
 	const std::string& getName() const;
 
+	bool hasSpec();
+	bool hasNorm();
+
 	// Child management.
 	size_t numberOfChildren() const;
 	const Object3D& getChild(size_t index) const;
@@ -55,6 +62,9 @@ public:
 	void setScale(const glm::vec3& scale);
 	void setCenter(const glm::vec3& center);
 	void setName(const std::string& name);
+
+	void setSpec(bool);
+	void setNorm(bool);
 
 	// Transformations.
 	void move(const glm::vec3& offset);

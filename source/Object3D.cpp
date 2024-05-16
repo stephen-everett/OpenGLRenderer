@@ -131,3 +131,20 @@ void Object3D::renderRecursive(sf::RenderWindow& window, ShaderProgram& shaderPr
 		child.renderRecursive(window, shaderProgram, trueModel);
 	}
 }
+
+
+void Object3D::setSpec(bool specValue) {
+	spec = specValue;
+}
+
+void Object3D::setNorm(bool normValue) {
+	norm = normValue;
+}
+
+bool Object3D::hasSpec() {
+	return spec;
+}
+
+bool Object3D::hasNorm() {
+	return norm;
+}

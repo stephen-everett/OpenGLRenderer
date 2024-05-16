@@ -19,6 +19,7 @@ std::vector<Texture> loadMaterialTextures(aiMaterial* mat, aiTextureType type, c
 		mat->GetTexture(type, i, &name);
 		std::filesystem::path texPath = modelPath.parent_path() / name.C_Str();
 
+		std::cout << "texPath ... : " << texPath << std::endl;
 		auto existing = loadedTextures.find(texPath);
 		if (existing != loadedTextures.end()) {
 			textures.push_back(existing->second);
@@ -149,6 +150,10 @@ std::shared_ptr<Object3D> assimpLoad(const std::string& path, bool flipTextureCo
 */
 
 std::shared_ptr<Object3D> assimpLoad(const std::string& path, bool flipTextureCoords) {
+	// tracker for what maps loaded
+	bool spec = false;
+	bool norm = false;
+
 	Assimp::Importer importer;
 
 	// Set import options for Assimp
@@ -208,6 +213,7 @@ std::shared_ptr<Object3D> assimpLoad(const std::string& path, bool flipTextureCo
 					sf::Image normal;
 					if (normal.loadFromFile(textureFullPath.string())) {
 						textures.emplace_back(std::make_pair("normalMap", std::move(normal)));
+						norm = true;
 					}
 					else {
 						std::cerr << "Failed to load normal map: " << textureFullPath.string() << std::endl;
@@ -226,6 +232,7 @@ std::shared_ptr<Object3D> assimpLoad(const std::string& path, bool flipTextureCo
 					sf::Image specular;
 					if (specular.loadFromFile(textureFullPath.string())) {
 						textures.emplace_back(std::make_pair("specMap", std::move(specular)));
+						spec = true;
 					}
 					else {
 						std::cerr << "Failed to load specular map: " << textureFullPath.string() << std::endl;
@@ -261,6 +268,8 @@ std::shared_ptr<Object3D> assimpLoad(const std::string& path, bool flipTextureCo
 	
 	// Process the node and then return an Object3D pointer
 	auto ret = std::make_shared<Object3D>(processAssimpNode(scene->mRootNode, scene, std::filesystem::path(path), loadedTextures));
+	ret->setSpec(spec);
+	ret->setNorm(norm);
 
 	return ret;
 }

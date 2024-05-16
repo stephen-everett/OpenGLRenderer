@@ -6,6 +6,7 @@ layout (location=0) out vec4 FragColor;
 in vec3 FragWorldPos;
 in vec3 Normal;
 in vec2 TexCoord;
+in mat3 TBN;
 
 // Uniform from application: the texture sampler.
 uniform sampler2D baseTexture;
@@ -37,21 +38,27 @@ uniform vec3 p_color3;
 uniform vec3 p_color4;
 uniform vec3 p_color5;
 
+uniform bool hasSpecMap;
+uniform bool hasNormMap;
 
-vec3 CalcDirLight(vec4 mat, vec3 view, vec3 amColor, vec3 dlight, vec3 dcolor);
-vec3 CalcPointLight(vec4 pmat,vec3 view, vec3 amColor, vec3 dlight, vec3 dcolor, vec3 position, vec3 color, vec3 normal);
+
+vec3 CalcDirLight(vec4 mat, vec3 view, vec3 amColor, vec3 dlight, vec3 dcolor, vec3 normal, bool h_spec);
+vec3 CalcPointLight(vec4 pmat,vec3 view, vec3 amColor, vec3 dlight, vec3 dcolor, vec3 position, vec3 color, vec3 normal, bool h_spec);
 
 
 void main() {
+    /*
     vec3 normal = texture(normalMap, TexCoord).rgb;
-    normal = normalize(normal * 2.0 - 1.0);
+    normal = normal * 2.0 - 1.0;
+    normal = normalize(TBN * normal);
+    */
 
-    vec3 directional_light = CalcDirLight(material,viewPos, ambientColor, directionalLight,directionalColor); 
-    vec3 point_light1 = CalcPointLight(point_material,  ambientColor, directionalLight,directionalColor,viewPos, position1, p_color1, Normal);
-    vec3 point_light2 = CalcPointLight(point_material,  ambientColor, directionalLight,directionalColor,viewPos, position2, p_color2, Normal);
-    vec3 point_light3 = CalcPointLight(point_material,  ambientColor, directionalLight,directionalColor,viewPos, position3, p_color3, Normal);
-    vec3 point_light4 = CalcPointLight(point_material,  ambientColor, directionalLight,directionalColor,viewPos, position4, p_color4, Normal);
-    vec3 point_light5 = CalcPointLight(point_material,  ambientColor, directionalLight,directionalColor,viewPos, position5, p_color5, Normal);
+    vec3 directional_light = CalcDirLight(material,viewPos, ambientColor, directionalLight,directionalColor, Normal, hasSpecMap); 
+    vec3 point_light1 = CalcPointLight(point_material,  ambientColor, directionalLight,directionalColor,viewPos, position1, p_color1, Normal, hasSpecMap);
+    vec3 point_light2 = CalcPointLight(point_material,  ambientColor, directionalLight,directionalColor,viewPos, position2, p_color2, Normal, hasSpecMap);
+    vec3 point_light3 = CalcPointLight(point_material,  ambientColor, directionalLight,directionalColor,viewPos, position3, p_color3, Normal, hasSpecMap);
+    vec3 point_light4 = CalcPointLight(point_material,  ambientColor, directionalLight,directionalColor,viewPos, position4, p_color4, Normal, hasSpecMap);
+    vec3 point_light5 = CalcPointLight(point_material,  ambientColor, directionalLight,directionalColor,viewPos, position5, p_color5, Normal, hasSpecMap);
 
     vec3 total_light = directional_light + point_light1 + point_light2 + point_light3 + point_light4 + point_light5;
     
@@ -59,14 +66,14 @@ void main() {
 }
    
 
-vec3 CalcDirLight(vec4 mat, vec3 view, vec3 amColor, vec3 dlight, vec3 dcolor) {
+vec3 CalcDirLight(vec4 mat, vec3 view, vec3 amColor, vec3 dlight, vec3 dcolor, vec3 normal, bool h_spec) {
     // ambient intensity
     vec3 ambientIntensity = vec3(0);
     ambientIntensity = mat.x * amColor;
 
     // diffuse intensity
     vec3 diffuseIntensity = vec3(0);
-    vec3 norm = normalize(Normal);
+    vec3 norm = normalize(normal);
     vec3 lightDir = normalize(-dlight);
     //vec3 lightDir = normalize(dlight);
 
@@ -79,8 +86,13 @@ vec3 CalcDirLight(vec4 mat, vec3 view, vec3 amColor, vec3 dlight, vec3 dcolor) {
         vec3 reflectDir = normalize(reflect(-lightDir, norm));
         float spec = dot(reflectDir, eyeDir);
         if (spec > 0) {
-            //specularIntensity = mat.z * directionalColor * pow(spec, mat.w);
-            specularIntensity = texture(specularMap, TexCoord).x * dcolor * pow(spec, mat.w);
+            if(h_spec){
+                specularIntensity = texture(specularMap, TexCoord).x * dcolor * pow(spec, mat.w);
+            }
+            else {
+                specularIntensity = mat.z * directionalColor * pow(spec, mat.w);
+            }
+            
         }
     }
 
@@ -97,7 +109,7 @@ vec3 CalcDirLight(vec4 mat, vec3 view, vec3 amColor, vec3 dlight, vec3 dcolor) {
 }
 
 
-vec3 CalcPointLight(vec4 pmat,vec3 view, vec3 amColor, vec3 dlight, vec3 dcolor, vec3 position, vec3 color, vec3 normal) {
+vec3 CalcPointLight(vec4 pmat,vec3 view, vec3 amColor, vec3 dlight, vec3 dcolor, vec3 position, vec3 color, vec3 normal, bool h_spec) {
 
     float constant = 1.0;
     float linear = 0.35;
@@ -125,14 +137,18 @@ vec3 CalcPointLight(vec4 pmat,vec3 view, vec3 amColor, vec3 dlight, vec3 dcolor,
         vec3 reflectDir = normalize(reflect(-lightDir, norm));
         float spec = dot(reflectDir, eyeDir);
         if (spec > 0) {
-            specularIntensity = pmat.z * directionalColor * pow(spec, pmat.w);
-            //specularIntensity = texture(specularMap, TexCoord).x * color * pow(spec, pmat.w);
+            if(h_spec){
+                specularIntensity = texture(specularMap, TexCoord).x * dcolor * pow(spec, pmat.w);
+            }
+            else {
+                specularIntensity = pmat.z * directionalColor * pow(spec, pmat.w);
+            }
         }
     }
 
     specularIntensity *= attenuation;
     diffuseIntensity *= attenuation;
-    specularIntensity *= attenuation;
+    ambientIntensity *= attenuation;
 
      // Select what lights to enable. 
     vec3 lightIntensity = ambientIntensity + diffuseIntensity + specularIntensity; // all lights. normal rendering

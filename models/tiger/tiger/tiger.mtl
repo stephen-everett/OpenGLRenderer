@@ -1,0 +1,15 @@
+# Blender 4.1.1 MTL File: 'None'
+# www.blender.org
+
+newmtl StingrayPBS1.001
+Ns 250.000000 # Specular (shiny) Color
+Ka 1.000000 1.000000 1.000000 # Ambient Color
+Ks 0.500000 0.500000 0.500000 # Specular Color
+Ke 0.000000 0.000000 0.000000 # Emissive Color
+Ni 1.500000 # Optical Density
+d 1.000000 # Opacity
+illum 2 # Highlight on
+map_Kd StingrayPBS1_baseColor.jpeg
+map_Bump StingrayPBS1_normal.jpeg
+bump StingrayPBS1_normal.jpeg
+map_Ks StingrayPBS1_metallicRoughness2.png

@@ -1,4 +1,5 @@
 #pragma once
+#include <functional>
 enum ObjectID {
 	CUBE,
 	TESTNODE,
@@ -17,6 +18,13 @@ enum ObjectID {
 	SOUND,
 	TABLE,
 	BRICKWALL
+};
+
+enum Maps {
+	NONE,
+	SPEC,
+	NORM,
+	NORM_SPEC
 };
 
 #ifndef M_PI
