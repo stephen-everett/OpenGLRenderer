@@ -61,7 +61,7 @@ void main() {
     vec3 point_light5 = CalcPointLight(point_material,  ambientColor, directionalLight,directionalColor,viewPos, position5, p_color5, Normal, hasSpecMap);
 
     vec3 total_light = directional_light + point_light1 + point_light2 + point_light3 + point_light4 + point_light5;
-    
+
     FragColor = vec4(total_light, 1) * texture(baseTexture, TexCoord);
 }
    

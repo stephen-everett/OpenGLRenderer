@@ -5,7 +5,7 @@
 Table::Table(EventBus* eventBus) : BusNode(TABLE, eventBus) {
 	// initialize variables
 	is_interactable = false;
-	model = assimpLoad("models/simple-office-table/source/OfficeTable.fbx", true);
+	model = assimpLoad("models/simple-office-table/table_new/table.obj", true);
 	model->setOrientation(glm::vec3(0, 1.56, 0));
 	model->move(glm::vec3(-6.7, -0.1, 1.2));
 	model->setScale(glm::vec3(0.01, 0.01, 0.01));

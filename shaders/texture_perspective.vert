@@ -22,12 +22,12 @@ void main() {
     TexCoord = vTexCoord;
 
     // calculate tangents for TBN
-    /*
+    
     vec3 T = normalize(vec3(model* vec4(vTangent, 0.0)));
     vec3 N = normalize(vec3(model* vec4(vNormal, 0.0)));
     vec3 B = cross(N,T);
     mat3 TBN = mat3(T,B,N);
-    */
+    
 
     // Transform the vertex normal to world space using the normal matrix.
     mat4 normalMatrix = transpose(inverse(model));
