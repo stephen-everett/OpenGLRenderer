@@ -17,7 +17,7 @@ int main() {
 	// event bus and renderer must be declared first before other objects
 	EventBus event_bus;
 	Renderer renderer(&event_bus);
-	//Interactor interactor(&event_bus);
+	Interactor interactor(&event_bus);
 	Sound sound(&event_bus);
 
 	// other objects
