@@ -3,8 +3,8 @@
 #include "Animation.h"
 #include "RotationAnimation.h"
 #include "TranslationAnimation.h"
-//#include "BezierTranslationAnimation.h"
-//#include "PauseAnimation.h"
+#include "BezierTranslationAnimation.h"
+#include "PauseAnimation.h"
 #include "CombinedAnimation.h"
 #include <functional>
 

@@ -12,6 +12,9 @@ enum ObjectID {
 	ROOM,
 	ANIMBUNNY,
 	INTERACTOR,
+	GMAN,
+	BUNNY1,
+	SOUND,
 	TABLE
 };
 

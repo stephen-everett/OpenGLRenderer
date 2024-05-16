@@ -12,7 +12,8 @@ enum EventEnums {
 	UPDATE,
 	R_REGISTER,
 	I_REGISTER,
-	CI_REGISTER
+	CI_REGISTER,
+	PLAY_SOUND
 };
 
 
