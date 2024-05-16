@@ -139,3 +139,11 @@ void ShaderProgram::setUniform(const std::string& uniformName, const glm::mat4& 
 {
     glUniformMatrix4fv(glGetUniformLocation(m_programId, uniformName.c_str()), 1, false, &value[0][0]);
 }
+void ShaderProgram::setUniform(const std::string& uniformName, const GlobalPhong value)
+{
+    glUniform3fv(glGetUniformLocation(m_programId, (uniformName + ".viewPos").c_str()), 1, &value.viewPos[0]);
+    glUniform3fv(glGetUniformLocation(m_programId, (uniformName + ".ambientColor").c_str()), 1, &value.ambientColor[0]);
+    glUniform3fv(glGetUniformLocation(m_programId, (uniformName + ".direction").c_str()), 1, &value.direction[0]);
+    glUniform3fv(glGetUniformLocation(m_programId, (uniformName + ".directionalColor").c_str()), 1, &value.directionalColor[0]);
+    glUniform3fv(glGetUniformLocation(m_programId, (uniformName + ".material").c_str()), 1, &value.material[0]);
+}

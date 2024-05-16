@@ -19,9 +19,13 @@ struct Vertex3D {
 
 	// add tx ty tz etc inside here and constructor
 
+	float_t tx;
+	float_t ty;
+	float_t tz;
+
 	Vertex3D(float_t px, float_t py, float_t pz, float_t normX, float_t normY, float_t normZ,
-		float_t texU, float_t texV) :
-		x(px), y(py), z(pz), nx(normX), ny(normY), nz(normZ), u(texU), v(texV) {}
+		float_t texU, float_t texV, float_t tan_x, float_t tan_y, float_t tan_z) :
+		x(px), y(py), z(pz), nx(normX), ny(normY), nz(normZ), u(texU), v(texV), tx(tan_x), ty(tan_y), tz(tan_z) {}
 };
 
 /**

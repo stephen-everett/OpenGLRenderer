@@ -58,22 +58,22 @@ Renderer::Renderer(EventBus* eventBus) : BusNode(RENDERER,eventBus) {
 	**********************************************************************************/
 	
 	// point light params
-	glm::vec4 point_material = glm::vec4(0, 1, 0.3, 8);
+	glm::vec4 point_material = glm::vec4(0.2, 1, 0.3, 8);
 
 	glm::vec3 position1 = glm::vec3(-0.255263, 2.41485, -0.898758);
-	glm::vec3 p_color1 = glm::vec3(2, 0, 0);
+	glm::vec3 p_color1 = glm::vec3(1, 0, 0);
 
 	glm::vec3 position2 = glm::vec3(-4.6, 1, 0.301242); // point light 2
-	glm::vec3 p_color2 = glm::vec3(0, 0, 2);
+	glm::vec3 p_color2 = glm::vec3(0, 0, 1);
 
 	glm::vec3 position3 = glm::vec3(-8.4, 1, 0.301242);
-	glm::vec3 p_color3 = glm::vec3(0, 2, 0);
+	glm::vec3 p_color3 = glm::vec3(0, 1, 0);
 
 	glm::vec3 position4 = glm::vec3(-12.2, 1, 0.301242);
-	glm::vec3 p_color4 = glm::vec3(2, 1, 2);
+	glm::vec3 p_color4 = glm::vec3(1, 0.5, 1);
 
 	glm::vec3 position5 = glm::vec3(-12.3, 1.3, -6.99875);
-	glm::vec3 p_color5 = glm::vec3(1, 0, 1.75);
+	glm::vec3 p_color5 = glm::vec3(0.5, 0, 0.85);
 
 	
 
@@ -188,6 +188,8 @@ void Renderer::render() {
 
 	for(std::shared_ptr<Object3D> object : render_objects) {
 		//object->render(*window, shaders[0]);
+		shaders[1].setUniform("hasSpecMap", object->hasSpec());
+		shaders[1].setUniform("hasNormMap", object->hasNorm());
 		object->render(*window, shaders[1]);
 	}
 	window->display();
