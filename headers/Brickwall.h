@@ -11,6 +11,7 @@ public:
 protected:
 	void onNotify(Event event);
 	Texture texture;
+	Texture normalMap;
 	std::shared_ptr<Object3D> model;
 private:
 	//Animator animator;

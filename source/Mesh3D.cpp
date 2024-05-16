@@ -80,14 +80,14 @@ void Mesh3D::render(sf::RenderWindow& window, ShaderProgram& program) const {
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-/*
+
 Mesh3D Mesh3D::square(const std::vector<Texture> &textures) {
 	return Mesh3D(
 		{ 
-		  { 0.5, 0.5, 0, 0, 0, 1, 1, 0 },    // TR
-		  { 0.5, -0.5, 0, 0, 0, 1, 1, 1 },   // BR
-		  { -0.5, -0.5, 0, 0, 0, 1, 0, 1 },  // BL
-		  { -0.5, 0.5, 0, 0, 0, 1, 0, 0 },   // TL
+		  { 0.5, 0.5, 0, 0, 0, 1, 1, 0, 0, 0, 0 },    // TR
+		  { 0.5, -0.5, 0, 0, 0, 1, 1, 1, 0, 0, 0 },   // BR
+		  { -0.5, -0.5, 0, 0, 0, 1, 0, 1 , 0, 0, 0},  // BL
+		  { -0.5, 0.5, 0, 0, 0, 1, 0, 0 , 0, 0, 0},   // TL
 		}, 
 		{ 
 			2, 1, 3,
@@ -96,7 +96,7 @@ Mesh3D Mesh3D::square(const std::vector<Texture> &textures) {
 		std::vector<Texture>(textures)
 	);
 }
-
+/*
 Mesh3D Mesh3D::triangle(Texture texture) {
 	return Mesh3D(
 		{ { -0.5, -0.5, 0., 0, 0, 1, 0., 1. },

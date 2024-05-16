@@ -49,13 +49,14 @@ vec3 CalcPointLight(vec4 pmat,vec3 view, vec3 amColor, vec3 dlight, vec3 dcolor,
 void main() {
     vec3 normal = Normal;
     
-    /*
+    
     if (hasNormMap) {
         normal = texture(normalMap, TexCoord).rgb;
         normal = normal * 2.0 - 1.0;
         normal = normalize(TBN * normal);
     }
-    */
+    
+    
     
     
     

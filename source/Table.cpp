@@ -8,6 +8,7 @@ Table::Table(EventBus* eventBus) : BusNode(TABLE, eventBus) {
 	model = assimpLoad("models/simple-office-table/table_new/table.obj", true);
 	model->setOrientation(glm::vec3(0, 1.56, 0));
 	model->move(glm::vec3(-6.7, -0.1, 1.2));
+	//model->setNorm(false);
 	//model->setScale(glm::vec3(0.01, 0.01, 0.01));
 
 	// register with renderer

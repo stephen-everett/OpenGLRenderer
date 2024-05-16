@@ -17,21 +17,25 @@ out vec3 FragWorldPos;
 out mat3 TBN;
 
 void main() {
+
     // Transform the position to clip space.
     gl_Position = projection * view * model * vec4(vPosition, 1.0);
     TexCoord = vTexCoord;
 
     // calculate tangents for TBN
-    
-    /*
-    vec3 T = normalize(vec3(model* vec4(vTangent, 0.0)));
-    vec3 N = normalize(vec3(model* vec4(vNormal, 0.0)));
+    mat3 normalMatrix1 = transpose(inverse(mat3(model)));
+    vec3 T = normalize(normalMatrix1* vTangent);
+    vec3 N = normalize(normalMatrix1* vNormal);
+    T = normalize(T - dot(T,N) * N);
     vec3 B = cross(N,T);
-    mat3 TBN = mat3(T,B,N);
-    */
+    TBN = transpose(mat3(T,B,N));
 
+    
+ 
     // Transform the vertex normal to world space using the normal matrix.
     mat4 normalMatrix = transpose(inverse(model));
     Normal = mat3(normalMatrix) * vNormal;
     FragWorldPos = vec3(model* vec4(vPosition, 1.0));
+
+
 }
