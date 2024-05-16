@@ -11,6 +11,7 @@ This application renders a textured mesh that was loaded with Assimp.
 #include "Bunny1.h"
 #include "Sound.h"
 #include "Table.h"
+#include "Brickwall.h"
 
 
 int main() {
@@ -22,19 +23,21 @@ int main() {
 
 	// other objects
 	//Bunny bunny(&event_bus);
-	//Room room(&event_bus);
+	Room room(&event_bus);
 	//AnimBunny animbunny(&event_bus);
 	//Gman gman(&event_bus);
 
 	// Bunny Scene
-	Bunny1 bunny1(&event_bus);
+	//Bunny1 bunny1(&event_bus);
 
 
 	Bunny bunny(&event_bus);
-	Room room(&event_bus);
+	//Room room(&event_bus);
 	//AnimBunny animbunny(&event_bus);
 
-	Table table(&event_bus);
+	//Table table(&event_bus);
+	//Bunny1 bunny1(&event_bus);
+	Brickwall brickwall(&event_bus);
 
 
 	// main loop

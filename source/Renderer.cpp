@@ -15,7 +15,7 @@ Renderer::Renderer(EventBus* eventBus) : BusNode(RENDERER,eventBus) {
 	Settings.depthBits = 24; // Request a 24 bits depth buffer
 	Settings.stencilBits = 8;  // Request a 8 bits stencil buffer
 	Settings.antialiasingLevel = 2;  // Request 2 levels of antialiasing
-	window = std::make_shared<sf::RenderWindow>(sf::VideoMode{ 1000, 1000 }, "SFML Demo", sf::Style::Resize | sf::Style::Close, Settings);
+	window = std::make_shared<sf::RenderWindow>(sf::VideoMode{ 1920, 1080 }, "SFML Demo", sf::Style::Resize | sf::Style::Close, Settings);
 	camera = std::make_unique<Camera>(eventBus, window);
 	gladLoadGL();
 

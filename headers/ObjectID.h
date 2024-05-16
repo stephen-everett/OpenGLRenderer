@@ -15,7 +15,8 @@ enum ObjectID {
 	GMAN,
 	BUNNY1,
 	SOUND,
-	TABLE
+	TABLE,
+	BRICKWALL
 };
 
 #ifndef M_PI
