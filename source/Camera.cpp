@@ -8,7 +8,7 @@ Camera::Camera(EventBus* eventBus, std::shared_ptr<sf::RenderWindow> rwindow) : 
 	pitch = 0.0f;
 	yaw = -90.0f;
 
-	pos = glm::vec3(-2, 0, 7);
+	pos = glm::vec3(0, 0, 0);
 	float look_x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
 	float look_y = sin(glm::radians(pitch));
 	float look_z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));

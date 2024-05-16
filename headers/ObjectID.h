@@ -14,7 +14,8 @@ enum ObjectID {
 	INTERACTOR,
 	GMAN,
 	BUNNY1,
-	SOUND
+	SOUND,
+	BRICKWALL
 };
 
 #ifndef M_PI

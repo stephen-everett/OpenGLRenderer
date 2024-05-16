@@ -83,7 +83,7 @@ Mesh3D fromAssimpMesh(const aiMesh* mesh, const aiScene* scene, const std::files
 }
 
 
-
+/*
 std::shared_ptr<Object3D> assimpLoad(const std::string& path, bool flipTextureCoords) {
 	Assimp::Importer importer;
 
@@ -95,13 +95,17 @@ std::shared_ptr<Object3D> assimpLoad(const std::string& path, bool flipTextureCo
 
 	// If the import failed, report it
 	if (nullptr == scene) {
-		throw std::runtime_error("Error loading assimp file ");
-
+		throw std::runtime_error("Error loading assimp file: " + std::string(importer.GetErrorString()));
 	}
 	else {
 
 	}
-	/*auto* mesh = scene->mMeshes[0];
+
+	// Troubleshooting for scene
+	std::cout << "Successfully loaded scene with " << scene->mNumMeshes << " meshes and "
+		<< scene->mNumMaterials << " materials." << std::endl;
+
+	auto* mesh = scene->mMeshes[0];
 	std::vector<std::pair<std::string, sf::Image>> textures;
 
 	if (scene->HasMaterials()) {
@@ -130,7 +134,7 @@ std::shared_ptr<Object3D> assimpLoad(const std::string& path, bool flipTextureCo
 			specular.loadFromFile(texPath.string());
 			textures.emplace_back(std::make_pair(std::string("specMap"), std::move(specular)));
 		}
-	}*/
+	}
 	//auto ret = Object3D(std::make_shared<Mesh3D>(fromAssimpMesh(scene->mMeshes[0], scene, textures)));
 	std::vector<Mesh3D> meshes;
 	std::unordered_map<std::filesystem::path, Texture> loadedTextures;
@@ -140,6 +144,125 @@ std::shared_ptr<Object3D> assimpLoad(const std::string& path, bool flipTextureCo
 	// The list of meshes in aiNode -> Model3D.
 	return std::move(ret);
 }
+*/
+
+std::shared_ptr<Object3D> assimpLoad(const std::string& path, bool flipTextureCoords) {
+	Assimp::Importer importer;
+
+	// Set import options for Assimp
+	auto options = aiProcessPreset_TargetRealtime_MaxQuality;
+	if (flipTextureCoords) {
+		options |= aiProcess_FlipUVs;
+	}
+	const aiScene* scene = importer.ReadFile(path, options);
+
+	// If the import failed, report it
+	if (nullptr == scene) {
+		throw std::runtime_error("Error loading assimp file: " + std::string(importer.GetErrorString()));
+	}
+
+	// checks the amount of meshes and materials in the scene
+	std::cout << "Successfully loaded scene with " << scene->mNumMeshes << " meshes and "
+		<< scene->mNumMaterials << " materials." << std::endl;
+
+	// Load textures
+	std::vector<std::pair<std::string, sf::Image>> textures;
+
+	// Load textures from materials
+	if (scene->HasMaterials()) {
+		// Loop through each material
+		for (unsigned int i = 0; i < scene->mNumMaterials; ++i) {
+			auto* material = scene->mMaterials[i];
+			aiString name;
+			material->Get(AI_MATKEY_NAME, name);
+			std::cout << "Material Name: " << name.C_Str() << std::endl;
+
+			// Process diffuse texture
+			if (material->GetTextureCount(aiTextureType_DIFFUSE) > 0) {
+				aiString texPath;
+				if (material->GetTexture(aiTextureType_DIFFUSE, 0, &texPath) == AI_SUCCESS) {
+					std::filesystem::path modelPath = path;
+					std::filesystem::path textureFullPath = modelPath.parent_path() / texPath.C_Str();
+					std::cout << "Diffuse Texture Path: " << textureFullPath.string() << std::endl;
+
+					sf::Image diffuse;
+					if (diffuse.loadFromFile(textureFullPath.string())) {
+						textures.emplace_back(std::make_pair("diffuse", std::move(diffuse)));
+					}
+					else {
+						std::cerr << "Failed to load diffuse texture: " << textureFullPath.string() << std::endl;
+					}
+				}
+			}
+
+			// Process normal map
+			if (material->GetTextureCount(aiTextureType_HEIGHT) > 0) {
+				aiString texPath;
+				if (material->GetTexture(aiTextureType_HEIGHT, 0, &texPath) == AI_SUCCESS) {
+					std::filesystem::path modelPath = path;
+					std::filesystem::path textureFullPath = modelPath.parent_path() / texPath.C_Str();
+					std::cout << "Normal Map Path: " << textureFullPath.string() << std::endl;
+
+					sf::Image normal;
+					if (normal.loadFromFile(textureFullPath.string())) {
+						textures.emplace_back(std::make_pair("normalMap", std::move(normal)));
+					}
+					else {
+						std::cerr << "Failed to load normal map: " << textureFullPath.string() << std::endl;
+					}
+				}
+			}
+
+			// Process specular map
+			if (material->GetTextureCount(aiTextureType_SPECULAR) > 0) {
+				aiString texPath;
+				if (material->GetTexture(aiTextureType_SPECULAR, 0, &texPath) == AI_SUCCESS) {
+					std::filesystem::path modelPath = path;
+					std::filesystem::path textureFullPath = modelPath.parent_path() / texPath.C_Str();
+					std::cout << "Specular Map Path: " << textureFullPath.string() << std::endl;
+
+					sf::Image specular;
+					if (specular.loadFromFile(textureFullPath.string())) {
+						textures.emplace_back(std::make_pair("specMap", std::move(specular)));
+					}
+					else {
+						std::cerr << "Failed to load specular map: " << textureFullPath.string() << std::endl;
+					}
+				}
+			}
+
+			// Process ambient occlusion map
+			if (material->GetTextureCount(aiTextureType_AMBIENT_OCCLUSION) > 0) {
+				aiString texPath;
+				if (material->GetTexture(aiTextureType_AMBIENT_OCCLUSION, 0, &texPath) == AI_SUCCESS) {
+					std::filesystem::path modelPath = path;
+					std::filesystem::path textureFullPath = modelPath.parent_path() / texPath.C_Str();
+					std::cout << "AO Map Path: " << textureFullPath.string() << std::endl;
+
+					sf::Image ao;
+					if (ao.loadFromFile(textureFullPath.string())) {
+						textures.emplace_back(std::make_pair("aoMap", std::move(ao)));
+					}
+					else {
+						std::cerr << "Failed to load AO map: " << textureFullPath.string() << std::endl;
+					}
+				}
+			}
+		}
+	}
+
+	// Process the first mesh in the scene
+	auto* mesh = scene->mMeshes[0];
+
+	// Load the mesh
+	std::unordered_map<std::filesystem::path, Texture> loadedTextures;
+	
+	// Process the node and then return an Object3D pointer
+	auto ret = std::make_shared<Object3D>(processAssimpNode(scene->mRootNode, scene, std::filesystem::path(path), loadedTextures));
+
+	return ret;
+}
+
 
 Object3D processAssimpNode(aiNode* node, const aiScene* scene,
 	const std::filesystem::path& modelPath,

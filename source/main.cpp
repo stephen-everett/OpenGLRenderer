@@ -10,6 +10,7 @@ This application renders a textured mesh that was loaded with Assimp.
 #include "Gman.h"
 #include "Bunny1.h"
 #include "Sound.h"
+#include "Brickwall.h"
 
 
 int main() {
@@ -26,8 +27,8 @@ int main() {
 	//Gman gman(&event_bus);
 
 	// Bunny Scene
-	Bunny1 bunny1(&event_bus);
-
+	//Bunny1 bunny1(&event_bus);
+	Brickwall brickwall(&event_bus);
 
 
 	// main loop
