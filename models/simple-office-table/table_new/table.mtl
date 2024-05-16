@@ -13,3 +13,4 @@ map_Kd OfficeTable_color.jpg
 map_Ns OfficeTable_roughness.jpg
 map_Bump -bm 1.000000 OfficeTable_normal.jpg
 map_Ka internal_ground_ao_texture.jpeg
+map_Ks OfficeTable_roughness.jpg

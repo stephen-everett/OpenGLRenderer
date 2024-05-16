@@ -47,18 +47,25 @@ vec3 CalcPointLight(vec4 pmat,vec3 view, vec3 amColor, vec3 dlight, vec3 dcolor,
 
 
 void main() {
+    vec3 normal = Normal;
+    
     /*
-    vec3 normal = texture(normalMap, TexCoord).rgb;
-    normal = normal * 2.0 - 1.0;
-    normal = normalize(TBN * normal);
+    if (hasNormMap) {
+        normal = texture(normalMap, TexCoord).rgb;
+        normal = normal * 2.0 - 1.0;
+        normal = normalize(TBN * normal);
+    }
     */
+    
+    
+    
 
-    vec3 directional_light = CalcDirLight(material,viewPos, ambientColor, directionalLight,directionalColor, Normal, hasSpecMap); 
-    vec3 point_light1 = CalcPointLight(point_material,  ambientColor, directionalLight,directionalColor,viewPos, position1, p_color1, Normal, hasSpecMap);
-    vec3 point_light2 = CalcPointLight(point_material,  ambientColor, directionalLight,directionalColor,viewPos, position2, p_color2, Normal, hasSpecMap);
-    vec3 point_light3 = CalcPointLight(point_material,  ambientColor, directionalLight,directionalColor,viewPos, position3, p_color3, Normal, hasSpecMap);
-    vec3 point_light4 = CalcPointLight(point_material,  ambientColor, directionalLight,directionalColor,viewPos, position4, p_color4, Normal, hasSpecMap);
-    vec3 point_light5 = CalcPointLight(point_material,  ambientColor, directionalLight,directionalColor,viewPos, position5, p_color5, Normal, hasSpecMap);
+    vec3 directional_light = CalcDirLight(material,viewPos, ambientColor, directionalLight,directionalColor, normal, hasSpecMap); 
+    vec3 point_light1 = CalcPointLight(point_material,  ambientColor, directionalLight,directionalColor,viewPos, position1, p_color1, normal, hasSpecMap);
+    vec3 point_light2 = CalcPointLight(point_material,  ambientColor, directionalLight,directionalColor,viewPos, position2, p_color2, normal, hasSpecMap);
+    vec3 point_light3 = CalcPointLight(point_material,  ambientColor, directionalLight,directionalColor,viewPos, position3, p_color3, normal, hasSpecMap);
+    vec3 point_light4 = CalcPointLight(point_material,  ambientColor, directionalLight,directionalColor,viewPos, position4, p_color4, normal, hasSpecMap);
+    vec3 point_light5 = CalcPointLight(point_material,  ambientColor, directionalLight,directionalColor,viewPos, position5, p_color5, normal, hasSpecMap);
 
     vec3 total_light = directional_light + point_light1 + point_light2 + point_light3 + point_light4 + point_light5;
 

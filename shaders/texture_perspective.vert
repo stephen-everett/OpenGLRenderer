@@ -23,6 +23,7 @@ void main() {
 
     // calculate tangents for TBN
     
+    /*
     vec3 T = normalize(vec3(model* vec4(vTangent, 0.0)));
     vec3 N = normalize(vec3(model* vec4(vNormal, 0.0)));
     vec3 B = cross(N,T);

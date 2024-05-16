@@ -8,7 +8,7 @@ Table::Table(EventBus* eventBus) : BusNode(TABLE, eventBus) {
 	model = assimpLoad("models/simple-office-table/table_new/table.obj", true);
 	model->setOrientation(glm::vec3(0, 1.56, 0));
 	model->move(glm::vec3(-6.7, -0.1, 1.2));
-	model->setScale(glm::vec3(0.01, 0.01, 0.01));
+	//model->setScale(glm::vec3(0.01, 0.01, 0.01));
 
 	// register with renderer
 	std::shared_ptr<struct Event>  register_object = std::make_shared<Event>(USER, R_REGISTER, RENDERER, static_cast<void*>(model.get()));
