@@ -5,8 +5,9 @@
 Bunny::Bunny(EventBus* eventBus) : BusNode(BUNNY, eventBus) {
 	// initialize variables
 	is_interactable = false;
-	model = assimpLoad("models/bunny_textured.obj", true);
-	model->move(glm::vec3(1, 2, -3));
+	model = assimpLoad("models/bunny/bunny_textured.obj", true);
+	model->move(glm::vec3(0, 0, -3));
+	//model->setScale(glm::vec3(0.1, 0.1, 0.1));
 
 	// register with renderer
 	std::shared_ptr<struct Event>  register_object = std::make_shared<Event>(USER, R_REGISTER, RENDERER, static_cast<void*>(model.get()));

@@ -42,6 +42,7 @@ Mesh3D fromAssimpMesh(const aiMesh* mesh, const aiScene* scene, const std::files
 		auto* tex = mesh->mTextureCoords[0];
 		if (tex != nullptr) {
 			vertices.emplace_back( mesh->mVertices[i].x, mesh->mVertices[i].y, mesh->mVertices[i].z,
+				// tangents here
 				mesh->mNormals[i].x, mesh->mNormals[i].y, mesh->mNormals[i].z,
 				//mesh->mTangents[i].x, mesh->mTangents[i].y, mesh->mTangents[i].z,
 				mesh->mTextureCoords[0][i].x, mesh->mTextureCoords[0][i].y );

@@ -15,6 +15,7 @@ enum ObjectID {
 	GMAN,
 	BUNNY1,
 	SOUND,
+	TABLE,
 	BRICKWALL
 };
 

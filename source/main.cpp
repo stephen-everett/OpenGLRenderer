@@ -10,6 +10,7 @@ This application renders a textured mesh that was loaded with Assimp.
 #include "Gman.h"
 #include "Bunny1.h"
 #include "Sound.h"
+#include "Table.h"
 #include "Brickwall.h"
 
 
@@ -17,7 +18,7 @@ int main() {
 	// event bus and renderer must be declared first before other objects
 	EventBus event_bus;
 	Renderer renderer(&event_bus);
-	//Interactor interactor(&event_bus);
+	Interactor interactor(&event_bus);
 	Sound sound(&event_bus);
 
 	// other objects
@@ -27,6 +28,14 @@ int main() {
 	//Gman gman(&event_bus);
 
 	// Bunny Scene
+	Bunny1 bunny1(&event_bus);
+
+
+	Bunny bunny(&event_bus);
+	Room room(&event_bus);
+	//AnimBunny animbunny(&event_bus);
+
+	Table table(&event_bus);
 	//Bunny1 bunny1(&event_bus);
 	Brickwall brickwall(&event_bus);
 
