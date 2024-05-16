@@ -45,6 +45,7 @@ vec3 CalcPointLight(vec4 pmat,vec3 view, vec3 amColor, vec3 dlight, vec3 dcolor,
 void main() {
     vec3 normal = texture(normalMap, TexCoord).rgb;
     normal = normalize(normal * 2.0 - 1.0);
+
     vec3 directional_light = CalcDirLight(material,viewPos, ambientColor, directionalLight,directionalColor); 
     vec3 point_light1 = CalcPointLight(point_material,  ambientColor, directionalLight,directionalColor,viewPos, position1, p_color1, Normal);
     vec3 point_light2 = CalcPointLight(point_material,  ambientColor, directionalLight,directionalColor,viewPos, position2, p_color2, Normal);
