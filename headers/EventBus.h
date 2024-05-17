@@ -3,6 +3,7 @@
 #include <functional>
 #include <queue>
 #include <map>
+#include <vector>
 #include "Events.h"
 #include "ObjectID.h"
 
@@ -12,12 +13,14 @@ public:
     EventBus();
     ~EventBus();
     void addReceiver(int tag, std::function<void(Event)> eventReceiver);
+    void addReceiver(std::function<void(Event)> eventReceiver);
     void removeReceiver(int tag);
     void sendMessage(std::shared_ptr<Event> event);
     void notify();
 private:
     std::queue<std::shared_ptr<Event> > event_queue;
-    std::map<int, std::function<void(Event)>> receivers;
+    //std::map<int, std::function<void(Event)>> receivers;
+    std::vector<std::function<void(Event)>> receivers;
 
 
 };

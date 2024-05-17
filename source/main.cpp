@@ -23,7 +23,7 @@ int main() {
 
 	// other objects
 	//Bunny bunny(&event_bus);
-	Room room(&event_bus);
+	//Room room(&event_bus);
 	//AnimBunny animbunny(&event_bus);
 	//Gman gman(&event_bus);
 
@@ -31,8 +31,8 @@ int main() {
 	//Bunny1 bunny1(&event_bus);
 
 
-	//Bunny bunny(&event_bus);
-	//Room room(&event_bus);
+	Bunny bunny(&event_bus);
+	Room room(&event_bus);
 	//AnimBunny animbunny(&event_bus);
 
 	//Table table(&event_bus);
