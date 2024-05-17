@@ -22,7 +22,7 @@ Renderer::Renderer(EventBus* eventBus) : BusNode(RENDERER,eventBus) {
 	// Load shaders and bind them for use.
 
 	// shared parameters
-	glm::vec4 material = glm::vec4(0.4, 0.8, .9, 32); // TODO, change for each model
+	glm::vec4 material = glm::vec4(0.2, 0.5, .4, 32); // TODO, change for each model
 	glm::vec3 ambientColor = glm::vec3(0.8, 0.8, 1); // ambient light color
 	glm::vec3 directionalLight = glm::vec3(1, -1, -1); // direction of light
 	glm::vec3 directionalColor = glm::vec3(1, 1, 1); // directional light color
@@ -190,6 +190,7 @@ void Renderer::render() {
 		//object->render(*window, shaders[0]);
 		shaders[1].setUniform("hasSpecMap", object->hasSpec());
 		shaders[1].setUniform("hasNormMap", object->hasNorm());
+		shaders[1].setUniform("useTBN", object->hasTBN());
 		object->render(*window, shaders[1]);
 	}
 	window->display();

@@ -17,7 +17,7 @@ void Interactor::update() {
 bool Interactor::isInteractable(glm::vec3 interactee) {
 	glm::vec3 vectorAB = interactee - *interactor_pos.value();
 	float distance = glm::length(vectorAB);
-	return distance < 2;
+	return distance < 3;
 }
 
 void Interactor::onNotify(Event event) {

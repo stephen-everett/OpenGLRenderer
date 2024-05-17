@@ -1,6 +1,7 @@
 #pragma once
 #include "BusNode.h"
 #include "Object3D.h"
+#include "Interactable.h"
 
 class Brickwall : public BusNode {
 public:
@@ -13,7 +14,10 @@ protected:
 	Texture texture;
 	Texture normalMap;
 	std::shared_ptr<Object3D> model;
+	void toggleInteractable(bool);
 private:
+	bool is_interactable;
+	std::shared_ptr<Interactable> interactor;
 	//Animator animator;
 	//sf::Time time;
 	//sf::Clock c;

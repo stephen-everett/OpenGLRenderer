@@ -30,6 +30,7 @@ private:
 	// keep track of what maps are available
 	bool spec;
 	bool norm;
+	bool tbn;
 
 	// Recomputes the local->world transformation matrix.
 	void rebuildModelMatrix();
@@ -50,6 +51,7 @@ public:
 
 	bool hasSpec();
 	bool hasNorm();
+	bool hasTBN();
 
 	// Child management.
 	size_t numberOfChildren() const;
@@ -65,6 +67,7 @@ public:
 
 	void setSpec(bool);
 	void setNorm(bool);
+	void setTBN(bool);
 
 	// Transformations.
 	void move(const glm::vec3& offset);

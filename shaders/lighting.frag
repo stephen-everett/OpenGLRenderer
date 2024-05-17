@@ -40,6 +40,7 @@ uniform vec3 p_color5;
 
 uniform bool hasSpecMap;
 uniform bool hasNormMap;
+uniform bool useTBN;
 
 
 vec3 CalcDirLight(vec4 mat, vec3 view, vec3 amColor, vec3 dlight, vec3 dcolor, vec3 normal, bool h_spec);
@@ -53,7 +54,9 @@ void main() {
     if (hasNormMap) {
         normal = texture(normalMap, TexCoord).rgb;
         normal = normal * 2.0 - 1.0;
-        normal = normalize(TBN * normal);
+        if(useTBN){
+            normal = normalize(TBN * normal);
+        }
         
     }
     

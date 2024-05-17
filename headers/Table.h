@@ -2,6 +2,7 @@
 #include "BusNode.h"
 #include "Object3D.h"
 #include "Interactable.h"
+#include "PhysicsStructures.h"
 
 class Table : public BusNode {
 public:
@@ -17,5 +18,12 @@ public:
 protected:
 	void onNotify(Event event);
 	std::shared_ptr<Object3D> model;
+	std::shared_ptr<Object3D> bunny1;
+	std::shared_ptr<Object3D> bunny2;
 	void toggleInteractable(bool);
+private:
+	float table_mu;
+	PhysicsStructure bunny1_properties;
+	PhysicsStructure bunny2_properties;
+
 };

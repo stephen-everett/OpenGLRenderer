@@ -1,5 +1,6 @@
 #include "Table.h"
 #include "AssimpImport.h"
+#include "Bunny.h"
 #include <iostream>
 
 Table::Table(EventBus* eventBus) : BusNode(TABLE, eventBus) {
@@ -8,7 +9,7 @@ Table::Table(EventBus* eventBus) : BusNode(TABLE, eventBus) {
 	model = assimpLoad("models/simple-office-table/table_new/table.obj", true);
 	model->setOrientation(glm::vec3(0, 1.56, 0));
 	model->move(glm::vec3(-6.7, -0.1, 1.2));
-	//model->setNorm(false);
+	model->setNorm(false);
 	//model->setScale(glm::vec3(0.01, 0.01, 0.01));
 
 	// register with renderer
@@ -25,6 +26,24 @@ Table::Table(EventBus* eventBus) : BusNode(TABLE, eventBus) {
 	);
 	std::shared_ptr<struct Event>  register_interactor = std::make_shared<Event>(USER, I_REGISTER, INTERACTOR, static_cast<void*>(interactor.get()));
 	eventBus->sendMessage(register_interactor);
+
+	// load bunnies
+	bunny1 =  assimpLoad("models/bunny/bunny_textured.obj", true);
+	bunny1->move(glm::vec3(-6.11122, 0.7, 0.996469));
+	bunny1->setOrientation(glm::vec3(0, -1.56, 0));
+	bunny2 = assimpLoad("models/bunny/bunny_textured.obj", true);
+	bunny2->move(glm::vec3(-7, 0.7, 0.996469));
+	bunny2->setOrientation(glm::vec3(0, -1.56, 0));
+
+	// register bunnies with renderer
+	std::shared_ptr<struct Event>  reg_bunny1 = std::make_shared<Event>(USER, R_REGISTER, RENDERER, static_cast<void*>(bunny1.get()));
+	eventBus->sendMessage(reg_bunny1);
+	std::shared_ptr<struct Event>  reg_bunny2 = std::make_shared<Event>(USER, R_REGISTER, RENDERER, static_cast<void*>(bunny2.get()));
+	eventBus->sendMessage(reg_bunny2);
+
+	// set bunny physical properties
+	bunny1_properties = PhysicsStructure(5, glm::vec3(0), glm::vec3(0));
+	bunny2_properties = PhysicsStructure(2, glm::vec3(0), glm::vec3(0));
 }
 
 void Table::render(sf::RenderWindow& window, ShaderProgram& shaderProgram) const {
@@ -38,38 +57,40 @@ void Table::update() {
 void Table::onNotify(Event event) {
 	switch (event.event_type) {
 	case SFML:
-		sf::Event ev = get<sf::Event>(event.event);
-		if (ev.type == sf::Event::KeyPressed) {
-			if (ev.key.scancode == sf::Keyboard::Scan::Up) {
-				model->move(glm::vec3(0, 0.1, 0));
-				std::cout << model->getPosition().x << ", " << model->getPosition().y << ", " << model->getPosition().z << std::endl;
-			}
-			if (ev.key.scancode == sf::Keyboard::Scan::Down) {
-				model->move(glm::vec3(0, -0.1, 0));
-				std::cout << model->getPosition().x << ", " << model->getPosition().y << ", " << model->getPosition().z << std::endl;
-			}
-			if (ev.key.scancode == sf::Keyboard::Scan::Left) {
-				model->move(glm::vec3(0.1, 0, 0));
-				std::cout << model->getPosition().x << ", " << model->getPosition().y << ", " << model->getPosition().z << std::endl;
-			}
-			if (ev.key.scancode == sf::Keyboard::Scan::Right) {
-				model->move(glm::vec3(-0.1, 0, 0));
-				std::cout << model->getPosition().x << ", " << model->getPosition().y << ", " << model->getPosition().z << std::endl;
-
-			}
-			if (ev.key.scancode == sf::Keyboard::Scan::M) {
-				model->move(glm::vec3(0, 0, 0.1));
-				std::cout << model->getPosition().x << ", " << model->getPosition().y << ", " << model->getPosition().z << std::endl;
-
-			}
-			if (ev.key.scancode == sf::Keyboard::Scan::N) {
-				model->move(glm::vec3(0, 0, -0.1));
-				std::cout << model->getPosition().x << ", " << model->getPosition().y << ", " << model->getPosition().z << std::endl;
-
-			}
-			if (ev.key.scancode == sf::Keyboard::Scan::R) {
-				model->rotate(glm::vec3(0, 0.01, 0));
-				std::cout << model->getOrientation().x << ", " << model->getOrientation().y << ", " << model->getOrientation().z << std::endl;
+		if (is_interactable) {
+			sf::Event ev = get<sf::Event>(event.event);
+			if (ev.type == sf::Event::KeyPressed) {
+				if (ev.key.scancode == sf::Keyboard::Scan::C) {
+					model->setTBN(!model->hasTBN());
+					if (model->hasTBN()) {
+						std::cout << "Table is now using TBN with Normal Map" << std::endl;
+					}
+					else {
+						std::cout << "Table is NOT using TBN with Normal Map" << std::endl;
+					}
+				}
+				else if (ev.key.scancode == sf::Keyboard::Scan::V) {
+					model->setSpec(!model->hasSpec());
+					if (model->hasSpec()) {
+						std::cout << "Table is now using Spec Map" << std::endl;
+					}
+					else {
+						std::cout << "Table is NOT using Spec Map" << std::endl;
+					}
+				}
+				else if (ev.key.scancode == sf::Keyboard::Scan::B) {
+					model->setNorm(!model->hasNorm());
+					if (model->hasNorm()) {
+						std::cout << "Table is now using Normal Map" << std::endl;
+					}
+					else {
+						std::cout << "Table is NOT using Normal Map" << std::endl;
+					}
+				}
+				else if (ev.key.scancode == sf::Keyboard::Scan::Up) {
+					bunny1->move(glm::vec3(0, .01, 0));
+					std::cout << bunny1->getPosition().x << ", " << bunny1->getPosition().y << ", " << bunny1->getPosition().z << std::endl;
+				}
 			}
 		}
 		break;

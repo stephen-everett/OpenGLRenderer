@@ -6,6 +6,11 @@ BusNode::BusNode(ObjectID tag, EventBus* eventBus)
     this->eventBus->addReceiver(tag, this->getNotifyFunc());
     this->id = tag;
 }
+BusNode::BusNode(EventBus* eventBus)
+{
+    this->eventBus = eventBus;
+    this->eventBus->addReceiver(this->getNotifyFunc());
+}
 
 std::function<void(Event)> BusNode::getNotifyFunc()
 {

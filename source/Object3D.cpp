@@ -140,6 +140,9 @@ void Object3D::setSpec(bool specValue) {
 void Object3D::setNorm(bool normValue) {
 	norm = normValue;
 }
+void Object3D::setTBN(bool TBN) {
+	tbn = TBN;
+}
 
 bool Object3D::hasSpec() {
 	return spec;
@@ -147,4 +150,8 @@ bool Object3D::hasSpec() {
 
 bool Object3D::hasNorm() {
 	return norm;
+}
+
+bool Object3D::hasTBN() {
+	return tbn;
 }

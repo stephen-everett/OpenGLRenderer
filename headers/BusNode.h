@@ -5,6 +5,7 @@ class BusNode {
 public:
     BusNode() = delete;
     BusNode(ObjectID tag, EventBus* eventBus);
+    BusNode(EventBus* eventBus);
     virtual void update();
     EventBus* getBus();
     void setBus(EventBus* bus);
