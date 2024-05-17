@@ -1,0 +1,13 @@
+# Blender 4.1.1 MTL File: 'None'
+# www.blender.org
+
+newmtl Material_#25
+Ns 20.000006
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 1
+map_Kd textures/cup_low_game3_D_1.png
+map_Bump -bm 1.000000 textures/cup_n.png

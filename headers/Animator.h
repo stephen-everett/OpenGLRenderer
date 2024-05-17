@@ -6,6 +6,8 @@
 #include "BezierTranslationAnimation.h"
 #include "PauseAnimation.h"
 #include "CombinedAnimation.h"
+#include "ArcAnimation.h"
+#include "ScaleAnimation.h"
 #include <functional>
 
 class Animator {

@@ -17,7 +17,8 @@ enum ObjectID {
 	BUNNY1,
 	SOUND,
 	TABLE,
-	BRICKWALL
+	BRICKWALL,
+	GAMETABLE
 };
 
 enum Maps {

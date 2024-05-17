@@ -7,7 +7,7 @@
 Bunny1::Bunny1(EventBus* eventBus) : BusNode(BUNNY1, eventBus) {
 	model = assimpLoad("models/bunny_textured.obj", true);
 	std::shared_ptr<Object3D> obj = model;
-	model->move(glm::vec3(0, 0, 0));
+	model->setPosition(glm::vec3(1.5181, -0.15, -8.03249));
 	std::shared_ptr<struct Event>  register_object = std::make_shared<Event>(USER, R_REGISTER, RENDERER, static_cast<void*>(model.get()));
 	eventBus->sendMessage(register_object);
 	time = c.getElapsedTime();

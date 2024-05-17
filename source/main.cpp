@@ -12,6 +12,7 @@ This application renders a textured mesh that was loaded with Assimp.
 #include "Sound.h"
 #include "Table.h"
 #include "Brickwall.h"
+#include "GameTable.h"
 
 
 int main() {
@@ -27,17 +28,18 @@ int main() {
 	//AnimBunny animbunny(&event_bus);
 	//Gman gman(&event_bus);
 
-	// Bunny Scene
-	//Bunny1 bunny1(&event_bus);
+	//Bunny Scene
+	Bunny1 bunny1(&event_bus);
 
 
-	Bunny bunny(&event_bus);
+	//Bunny bunny(&event_bus);
 	Room room(&event_bus);
 	//AnimBunny animbunny(&event_bus);
 
 	Table table(&event_bus);
+	GameTable GameTable(&event_bus);
 	//Bunny1 bunny1(&event_bus);
-	Brickwall brickwall(&event_bus);
+	//Brickwall brickwall(&event_bus);
 
 
 	// main loop
@@ -57,6 +59,8 @@ int main() {
 
 		// tell renderer to render
 		renderer.render();
+
+
 	}
 	return 0;
 }
