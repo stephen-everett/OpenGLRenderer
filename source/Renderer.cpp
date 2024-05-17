@@ -81,6 +81,11 @@ Renderer::Renderer(EventBus* eventBus) : BusNode(RENDERER,eventBus) {
 	float linear = 0.09f;
 	float quadratic = 0.032f;
 
+	// spot light params
+	glm::vec4 spot_material = glm::vec4(1, 1, 1, 8);
+	glm::vec3 spotLightPosition = glm::vec3(0, 0, 0);
+	glm::vec3 spotLightDirection = glm::vec3(0, 0, -1);
+	float spotLightCutoff = glm::cos(glm::radians(5.0f));
 
 
 	ShaderProgram lightShader;
@@ -119,6 +124,12 @@ Renderer::Renderer(EventBus* eventBus) : BusNode(RENDERER,eventBus) {
 	shaders[1].setUniform("quadratic", quadratic);
 	shaders[1].setUniform("point_material", point_material);
 	
+
+	// Set spot light uniforms
+	shaders[1].setUniform("spotLightPosition", spotLightPosition);
+	shaders[1].setUniform("spotLightDirection", spotLightDirection);
+	shaders[1].setUniform("spotLightCutOff", spotLightCutoff);
+	shaders[1].setUniform("spot_material", spot_material);
 	
 	// OpenGL setup
 	glEnable(GL_DEPTH_TEST);
@@ -179,6 +190,7 @@ void Renderer::onNotify(Event event) {
 void Renderer::render() {
 	//window->clear();
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 
 	shaders[1].setUniform("view", camera->getCamera());
 	shaders[1].setUniform("viewPos", camera->getLocation());
