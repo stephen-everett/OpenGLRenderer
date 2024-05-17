@@ -42,8 +42,8 @@ Table::Table(EventBus* eventBus) : BusNode(TABLE, eventBus) {
 	eventBus->sendMessage(reg_bunny2);
 
 	// set bunny physical properties
-	bunny1_properties = PhysicsStructure(5, glm::vec3(0), glm::vec3(0));
-	bunny2_properties = PhysicsStructure(2, glm::vec3(0), glm::vec3(0));
+	//bunny1_properties = PhysicsStructure(5, glm::vec3(0), glm::vec3(0));
+	//bunny2_properties = PhysicsStructure(2, glm::vec3(0), glm::vec3(0));
 }
 
 void Table::render(sf::RenderWindow& window, ShaderProgram& shaderProgram) const {

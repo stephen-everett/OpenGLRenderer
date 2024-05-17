@@ -23,7 +23,7 @@ protected:
 	void toggleInteractable(bool);
 private:
 	float table_mu;
-	PhysicsStructure bunny1_properties;
-	PhysicsStructure bunny2_properties;
+	//PhysicsStructure bunny1_properties;
+	//PhysicsStructure bunny2_properties;
 
 };
