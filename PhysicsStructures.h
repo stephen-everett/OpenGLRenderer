@@ -10,4 +10,10 @@ struct PhysicsStructure {
 		acceleration = a;
 		velocity = v;
 	}
+
+	PhysicsStructure() {
+		mass = 0;
+		acceleration = glm::vec3(0);
+		velocity = glm::vec3(0);
+	}
 };

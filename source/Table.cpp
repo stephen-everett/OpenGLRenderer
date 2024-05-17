@@ -32,7 +32,8 @@ Table::Table(EventBus* eventBus) : BusNode(TABLE, eventBus) {
 	bunny1->move(glm::vec3(-6.11122, 0.7, 0.996469));
 	bunny1->setOrientation(glm::vec3(0, -1.56, 0));
 	bunny2 = assimpLoad("models/bunny/bunny_textured.obj", true);
-	bunny2->move(glm::vec3(-7, 0.7, 0.996469));
+	bunny2_start_pos = glm::vec3(-7, 0.7, 0.996469);
+	bunny2->move(bunny2_start_pos);
 	bunny2->setOrientation(glm::vec3(0, -1.56, 0));
 
 	// register bunnies with renderer
@@ -42,8 +43,10 @@ Table::Table(EventBus* eventBus) : BusNode(TABLE, eventBus) {
 	eventBus->sendMessage(reg_bunny2);
 
 	// set bunny physical properties
-	//bunny1_properties = PhysicsStructure(5, glm::vec3(0), glm::vec3(0));
-	//bunny2_properties = PhysicsStructure(2, glm::vec3(0), glm::vec3(0));
+	bunny1_properties = PhysicsStructure(5, glm::vec3(0), glm::vec3(0));
+	bunny2_properties = PhysicsStructure(2, glm::vec3(0), glm::vec3(0));
+	simulation_running = false;
+	table_mu = 0.0000001;
 }
 
 void Table::render(sf::RenderWindow& window, ShaderProgram& shaderProgram) const {
@@ -51,7 +54,34 @@ void Table::render(sf::RenderWindow& window, ShaderProgram& shaderProgram) const
 }
 
 void Table::update() {
+	tick_simulation();
+}
 
+void Table::start_simulation() {
+	time = c.getElapsedTime();
+	bunny2_properties.acceleration = glm::vec3(0.0001, 0, 0);
+	simulation_running = true;
+}
+
+void Table::tick_simulation() {
+	if (simulation_running) {
+		sf::Time now = c.getElapsedTime();
+		auto diff = now - time;
+		bunny2_properties.acceleration += glm::vec3(-(bunny2_properties.mass * table_mu),0,0);
+		bunny2_properties.velocity += bunny2_properties.acceleration * diff.asSeconds();
+		if (bunny2_properties.velocity.x <= 0) {
+			simulation_running = false;
+		}
+		bunny2->move(bunny2_properties.velocity);
+	}
+}
+
+void Table::restart_simulation() {
+	simulation_running = false;
+	bunny2->move(-bunny2->getPosition());
+	bunny2->move(bunny2_start_pos);
+	bunny2_properties.acceleration = glm::vec3(0);
+	bunny2_properties.velocity = glm::vec3(0);
 }
 
 void Table::onNotify(Event event) {
@@ -90,6 +120,14 @@ void Table::onNotify(Event event) {
 				else if (ev.key.scancode == sf::Keyboard::Scan::Up) {
 					bunny1->move(glm::vec3(0, .01, 0));
 					std::cout << bunny1->getPosition().x << ", " << bunny1->getPosition().y << ", " << bunny1->getPosition().z << std::endl;
+				}
+				else if (ev.key.scancode == sf::Keyboard::Scan::E) {
+					if (!simulation_running) {
+						start_simulation();
+					}
+				}
+				else if (ev.key.scancode == sf::Keyboard::Scan::R) {
+					restart_simulation();
 				}
 			}
 		}

@@ -72,9 +72,9 @@ void main() {
     vec3 point_light3 = CalcPointLight(point_material,  ambientColor, directionalLight,directionalColor,viewPos, position3, p_color3, normal, hasSpecMap);
     vec3 point_light4 = CalcPointLight(point_material,  ambientColor, directionalLight,directionalColor,viewPos, position4, p_color4, normal, hasSpecMap);
     vec3 point_light5 = CalcPointLight(point_material,  ambientColor, directionalLight,directionalColor,viewPos, position5, p_color5, normal, hasSpecMap);
-    vec3 spot_light = CalcSpotLight(material,viewPos, ambientColor, spotLightDirection,directionalColor, normal, hasSpecMap, spotLightCutOff); 
+    //vec3 spot_light = CalcSpotLight(material,viewPos, ambientColor, spotLightDirection,directionalColor, normal, hasSpecMap, spotLightCutOff); 
 
-    vec3 total_light = directional_light + point_light1 + point_light2 + point_light3 + point_light4 + point_light5 + spot_light;
+    vec3 total_light = directional_light + point_light1 + point_light2 + point_light3 + point_light4 + point_light5;// + spot_light;
 
     //vec3 total_light = spot_light;
 

@@ -12,6 +12,10 @@ public:
 	void render(sf::RenderWindow& window, ShaderProgram& shaderProgram) const;
 
 	bool is_interactable;
+	bool simulation_running;
+
+	sf::Time time;
+	sf::Clock c;
 
 	std::shared_ptr<Interactable> interactor;
 
@@ -23,7 +27,11 @@ protected:
 	void toggleInteractable(bool);
 private:
 	float table_mu;
-	//PhysicsStructure bunny1_properties;
-	//PhysicsStructure bunny2_properties;
+	PhysicsStructure bunny1_properties;
+	PhysicsStructure bunny2_properties;
+	glm::vec3 bunny2_start_pos;
+	void tick_simulation();
+	void start_simulation();
+	void restart_simulation();
 
 };
